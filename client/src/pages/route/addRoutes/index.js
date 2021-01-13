@@ -7,6 +7,7 @@ import { urlToCoords, getDirectionsObj } from "../../../../lib/Functions/functio
 import { GoogleMapsPreview } from "../../../components/GoogleMaps/embed_maps"
 import { getJSONRoute } from "../../../services/GoogleMaps_Service"
 import { TextRichDescription } from "../../../components/RichTextArea/index-quill.js"
+import { Select } from "react-select"
 
 
 // Styles
@@ -21,12 +22,13 @@ import {
     ButtonSubmit,
     ButtonGM,
     ButtonAdd,
+    ButtonBack,
     MapContainer,
     DataContainer,
     RouteDataForm,
     DataInput,
     HighText,
-    Select,
+    SelectInput,
 } from "./style"
 
 
@@ -52,10 +54,27 @@ export const AddRoute = withRouter(({ history }, props) => {
 
     }
 
+    // Refresh page to fix bugs with map embeded
     const addNewRoute = () => {
-        console.log("bye!")
         location.reload()
     }
+
+    // Selector Options
+
+    const selectOptions = [
+        { value: "Enduro", label: "Enduro" },
+        { value: "Off-Road", label: "Off-Road" },
+        { value: "Carretera", label: "Carretera" },
+        { value: "Circuito", label: "Circuito" }
+    ]
+
+    const formatGroupLabel = data => (
+        <div style={groupStyles}>
+            <span>{data.label}</span>
+            <span style={groupBadgeStyles}>{data.options.length}</span>
+        </div>
+    );
+
 
     const createRoute = (data) => {
         console.log("Route Added", data)
@@ -101,7 +120,7 @@ export const AddRoute = withRouter(({ history }, props) => {
                                 <TitlePage>Añadir Nueva Ruta</TitlePage>
                             </TitleContainer>
                             <AddURLContainer>
-                                <button type="button" onClick={() => addNewRoute()}>Volver</button>
+                                <ButtonBack type="button" onClick={() => addNewRoute()} value="Volver" />
                             </AddURLContainer>
                             <TitleRoute>Título</TitleRoute>
                         </Container>
@@ -132,22 +151,24 @@ export const AddRoute = withRouter(({ history }, props) => {
                                                     required: false
                                                 })} />
                                             </li>
-                                            <li><HighText>Tipo de Motos</HighText>
-                                                <DataInput type="text" name="distance" defaultValue={dataRoute.startPoint} ref={register({
-                                                    required: false
-                                                })} />
-                                            </li>
                                             <li><HighText>Estilo de Ruta</HighText>
                                                 <DataInput type="text" name="distance" defaultValue={dataRoute.startPoint} ref={register({
                                                     required: false
                                                 })} />
                                             </li>
+                                            <li>
+                                                <Select
+                                                    defaultValue={{ label: 'Default Option', value: 'default-value' }}
+                                                    defaultInputValue="Search Text"
+                                                    defaultMenuIsOpen={true}
+                                                />
+                                            </li>
                                             <li><HighText>Dificultad</HighText>
-                                                <Select name="Title" ref={register({ required: true })}>
+                                                <SelectInput name="Title" ref={register({ required: true })}>
                                                     <option value="easy">Fácil</option>
                                                     <option value="medium">Normal</option>
                                                     <option value="hard">Difícil</option>
-                                                </Select>
+                                                </SelectInput>
                                             </li>
                                             <li><HighText>Punto de Salida Recomendado</HighText>
                                                 <DataInput type="text" name="distance" defaultValue={dataRoute.startPoint} ref={register({

@@ -15,6 +15,7 @@ width: 100%;
 export const TitleRoute = styled.p`
 font-size: 1.2em;
 color: black;
+margin: 0.8em 0;
 `
 
 export const URLMapForm = styled.form`
@@ -87,7 +88,7 @@ export const HighText = styled.p`
 font-size: 0.9em;
 color: grey
 `
-export const Select = styled.select`
+export const SelectInput = styled.select`
 color: black;
 font-weight: bold;
 border: none;
@@ -111,4 +112,13 @@ cursor: pointer;
 &:hover{
     background-color: #F44336
 }
+`
+
+export const ButtonBack = styled.input`
+background: #a2a0a0;
+border: none;
+padding: 0.3em 0.7em;
+border-radius: 5px;
+box-shadow: -1px 1px 2px 0px #1d1d1de3;
+cursor: pointer;
 `
