@@ -1,18 +1,18 @@
 import React from "react"
 
 // Styles
-import { MainNavContainer } from "./style"
+import { MainNavContainer, ULBar } from "./style"
 
 export const NavBar = () => {
 
 
     return (
         <MainNavContainer>
-            <ul>
+            <ULBar>
                 <li>Example 1</li>
                 <li>Example 2</li>
                 <li>Example 3</li>
-            </ul>
+            </ULBar>
         </MainNavContainer>
     )
 }

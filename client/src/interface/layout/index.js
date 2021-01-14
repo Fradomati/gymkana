@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 
 
 // Styles
-import { GlobalContainer, MainContentContainer } from "./style"
+import { GlobalContainer, MainContentContainer, ContentContainer } from "./style"
 
 // NavBar
 import { NavBar } from "../navbar/index"
@@ -23,7 +23,9 @@ export const Layout = ({ children }) => {
             <NavBar />
             {/*  )}   */}
             <MainContentContainer>
-                {children}
+                <ContentContainer>
+                    {children}
+                </ContentContainer>
             </MainContentContainer>
         </GlobalContainer>
     )
