@@ -85,7 +85,9 @@ app.use('/', index);
 const auth = require("./routes/auth");
 app.use("/auth", auth);
 
-
+// Generator Route
+const generator = require("./routes/generator");
+app.use("/generator", generator)
 
 
 

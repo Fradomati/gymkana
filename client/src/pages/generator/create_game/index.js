@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form"
 
+// Services
+import { createGameFN } from "../../../services/Generator_Service"
 
 
 
@@ -11,8 +13,15 @@ export const CreateGame = () => {
         mode: "onSubmit"
     })
 
-    const createGame = (data) => {
-        console.log(data)
+    const createGame = async (data) => {
+        const response = await createGameFN({
+            title: data.title,
+            description: data.description,
+            category: [data.category],
+            tags: [data.tags]
+        })
+
+        console.log(`Se ha creado ${response}`)
     }
 
     return (

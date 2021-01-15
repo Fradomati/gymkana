@@ -10,5 +10,5 @@ export const createGameFN = async ({ title, description, category, tags }) => {
         category,
         tags
     })
-
+    return response.data
 }
