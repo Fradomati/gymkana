@@ -10,5 +10,11 @@ export const createGameFN = async ({ title, description, category, tags }) => {
         category,
         tags
     })
+
+    return response.data
+}
+
+export const getAllGamesFN = async () => {
+    const response = await generatorService.get("/findAll")
     return response.data
 }
