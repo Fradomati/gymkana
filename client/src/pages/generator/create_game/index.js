@@ -6,11 +6,17 @@ import { createGameFN } from "../../../services/Generator_Service"
 
 // LFG 
 import { LFG } from "../../../components/LFG/index"
+import { Challenger } from "../../../components/Challengers/index"
+
+// Funtions 
+import { counter } from "../../../../lib/Functions/_functions"
 
 
 export const CreateGame = () => {
     const [game, setGame] = useState()
     const [errorGame, setErrorGame] = useState()
+    // Add challegner
+    const [addCGER, setAddCGER] = useState(false)
 
     const { register, handleSubmit } = useForm({
         mode: "onSubmit"
@@ -34,7 +40,7 @@ export const CreateGame = () => {
     if (!game) {
         return (
             <>
-                <LFG gameState={[game, setGame]} />
+                <LFG gameState={setGame} />
                 <div>Crear nueva Gymkana</div>
                 <form onSubmit={handleSubmit(createGame)}>
                     {errorGame && (<div>--¡{errorGame}!--</div>)}
@@ -65,8 +71,13 @@ export const CreateGame = () => {
     } else {
         return (
             <>
+                <LFG gameState={setGame} />
                 <div>{game.title}</div>
-                <div>adiós</div>
+                <div>Número de Pruebas: {counter(game.challengers)}</div>
+                <input type="button" value="Añadir Prueba" onClick={() => { setAddCGER(true) }} />
+                {addCGER && (
+                    <Challenger counter={counter(game.challengers)} setAddState={setAddCGER} />
+                )}
             </>
         )
     }
