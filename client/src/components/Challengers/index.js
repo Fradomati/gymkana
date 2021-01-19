@@ -12,13 +12,23 @@ export const Challenger = (props) => {
     })
 
     /* AGREGAR URLS */
+    const defValue = "Introduce URL"
     const addInputURL = () => {
-        setInputUrl(inputURL => [...inputURL, "Introduce URL"])
+        setInputUrl(inputURL => [...inputURL, defValue])
     }
 
     const addURL = (data) => {
-        data.URL
+        let update = [...inputURL]
+        update[data.id] = data.url
+        setInputUrl(update)
     }
+
+    const removeURL = (index) => {
+        let update = [...inputURL]
+        update.splice(index, 1)
+        setInputUrl(update)
+    }
+
 
 
 
@@ -32,16 +42,29 @@ export const Challenger = (props) => {
                 {inputURL.length != 0 && (inputURL.map((e, i) => {
                     return (
                         <li key={i}>
-                            <form onSubmit={handleSubmit(addURL)}>
-                                <input placeholder={e} />
-                                <input type="submit" /><p>No</p>
-                            </form>
+                            {inputURL[i] != defValue
+                                ? (
+                                    <>
+                                        <p>{inputURL[i]}</p>
+                                        <button type="button" onClick={() => { removeURL(i) }}>No</button>
+                                    </>
+                                )
+                                : (
+                                    <form onSubmit={handleSubmit(addURL)}>
+                                        <input placeholder={e} name="url" ref={register({
+                                            required: false
+                                        })} />
+                                        <input style={{ display: "none" }} name="id" defaultValue={i} ref={register({
+                                            required: false
+                                        })} />
+                                        <input type="submit" /><button type="button" onClick={() => { removeURL(i) }}>No</button>
+                                    </form>
+                                )}
                         </li>
                     )
                 })
                 )}
             </ul>
-            <p>Agregar URL 2</p>
             <p>Agregar Imagen</p>
             <p>Embeber Imágen</p>
             <p>Embeber Vídeo</p>
