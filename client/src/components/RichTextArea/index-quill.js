@@ -27,6 +27,9 @@ export const TextRichDescription = (props) => {
     }
 
     const { quill, quillRef } = useQuill({ modules })
+    useEffect(() => {
+        quill.root.innerHTML = `<p>Hola</p>`
+    }, [])
 
     useEffect(() => {
         if (quill) {
@@ -39,7 +42,7 @@ export const TextRichDescription = (props) => {
 
     return (
         <EditorContainerQuill >
-            <div ref={quillRef} />
+            <div ref={quillRef} defaultValue={`<p>Hola</p>`} />
         </EditorContainerQuill>
     )
 }
