@@ -17,7 +17,7 @@ export const Challenger = (props) => {
     const [descriptionEdited, setDescriptionEdited] = useState();
     const [answerEdited, setAnswerEdited] = useState();
 
-    const counter = props.counter + 1
+    const counter = props.counter + 1;
 
     const { register, handleSubmit } = useForm({
         mode: "onSubmit"
@@ -80,6 +80,7 @@ export const Challenger = (props) => {
 
     /* AGREGAR DESCRIPCIÓN */
     const defValueDescription = "Introducir Descripción";
+    const [storeDes, setStoreDes] = useState(false);
     const addDescription = (data) => {
         const description = data.description;
         setInputDescription(description);
@@ -199,7 +200,7 @@ export const Challenger = (props) => {
                                 {inputTitle}
                                 <button type="button" onClick={() => setTitleEdited(inputTitle)}>
                                     Editar
-                                </button>
+                </button>
                             </>
                         ) : (
                                 <form onSubmit={handleSubmit(editTitle)}>
@@ -216,41 +217,21 @@ export const Challenger = (props) => {
                     </div>
                 )}
             <p>Agregar Descripción</p>
-            <TextRichDescription />
-            {!inputDescription ? (
-                <form onSubmit={handleSubmit(addDescription)}>
-                    <input
-                        placeholder={defValueDescription}
-                        name="description"
-                        ref={register({
-                            required: false
-                        })}
+            {storeDes ? (
+                <>
+                    <TextRichDescription
+                        state={inputDescription}
+                        setState={setInputDescription}
                     />
-                    <input type="submit" />
-                </form>
+                    <button onClick={() => setStoreDes(false)}>Guardar</button>
+                </>
             ) : (
-                    <div>
-                        {!descriptionEdited ? (
-                            <>
-                                {inputDescription}
-                                <button type="button" onClick={() => setDescriptionEdited(inputDescription)}>
-                                    Editar
-                                </button>
-                            </>
-                        ) : (
-                                <form onSubmit={handleSubmit(editDescription)}>
-                                    <input
-                                        defaultValue={inputDescription}
-                                        name="description"
-                                        ref={register({
-                                            required: false
-                                        })}
-                                    />
-                                    <input type="submit" />
-                                </form>
-                            )}
-                    </div>
+                    <>
+                        <div dangerouslySetInnerHTML={{ __html: inputDescription }}></div>
+                        <button onClick={() => setStoreDes(true)}>+</button>
+                    </>
                 )}
+
             <div>
                 <span>Agregar URL </span>
                 <button
@@ -485,16 +466,12 @@ export const Challenger = (props) => {
                                             No
                       </button>
                                         <div
-                                            onClick={() =>
-                                                position(i, inputVideo, setInputVideo, -1)
-                                            }
+                                            onClick={() => position(i, inputVideo, setInputVideo, -1)}
                                         >
                                             +
                       </div>
                                         <div
-                                            onClick={() =>
-                                                position(i, inputVideo, setInputVideo, 1)
-                                            }
+                                            onClick={() => position(i, inputVideo, setInputVideo, 1)}
                                         >
                                             -
                       </div>
@@ -692,9 +669,12 @@ export const Challenger = (props) => {
                         {!answerEdited ? (
                             <>
                                 {inputAnswer}
-                                <button type="button" onClick={() => setAnswerEdited(inputAnswer)}>
+                                <button
+                                    type="button"
+                                    onClick={() => setAnswerEdited(inputAnswer)}
+                                >
                                     Editar
-                        </button>
+                </button>
                             </>
                         ) : (
                                 <form onSubmit={handleSubmit(editAnswer)}>
