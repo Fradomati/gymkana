@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form"
 import { TextRichDescription } from "../RichTextArea/index-quill"
 
+// Styles Challengers 
+import { CounterProof, TopTextLittle, AddContainer, FieldContainer, InputAdd, InputOk, ButtonNo } from "./style"
+
+// Styles Global
+import { AddButton } from "../../globalStyles/buttons"
+
 export const Challenger = (props) => {
     const [inputURL, setInputURL] = useState([]);
     const [inputIMG, setInputIMG] = useState([]);
@@ -87,11 +93,11 @@ export const Challenger = (props) => {
     };
 
     /* EDITAR TÍTULO */
-    const editDescription = (data) => {
-        const description = data.description;
-        setInputDescription(description);
-        setDescriptionEdited();
-    };
+    // const editDescription = (data) => {
+    //     const description = data.description;
+    //     setInputDescription(description);
+    //     setDescriptionEdited();
+    // };
 
     /* AGREGAR RESPUESTA */
     const defValueAnswer = "Introducir Respuesta";
@@ -180,8 +186,8 @@ export const Challenger = (props) => {
 
     return (
         <>
-            <h1>Prueba: {counter}</h1>
-            <p>Agregar Título</p>
+            <CounterProof>PRUEBA {counter}</CounterProof>
+            <TopTextLittle>Agregar Título</TopTextLittle>
             {!inputTitle ? (
                 <form onSubmit={handleSubmit(addTitle)}>
                     <input
@@ -216,7 +222,7 @@ export const Challenger = (props) => {
                             )}
                     </div>
                 )}
-            <p>Agregar Descripción</p>
+            <TopTextLittle>Agregar Descripción</TopTextLittle>
             {storeDes ? (
                 <>
                     <TextRichDescription
@@ -232,17 +238,19 @@ export const Challenger = (props) => {
                     </>
                 )}
 
-            <div>
-                <span>Agregar URL </span>
-                <button
-                    type="button"
-                    onClick={() => {
-                        addInput(setInputURL, defValueURL);
-                    }}
-                >
-                    +
-          </button>
-            </div>
+            <FieldContainer>
+                <AddContainer>
+                    <TopTextLittle>Agregar URL </TopTextLittle>
+                    <AddButton
+                        type="button"
+                        onClick={() => {
+                            addInput(setInputURL, defValueURL);
+                        }}
+                    >
+                        +
+                    </AddButton>
+                </AddContainer>
+            </FieldContainer>
             <ul>
                 {inputURL.length != 0 &&
                     inputURL.map((e, i) => {
@@ -268,7 +276,7 @@ export const Challenger = (props) => {
                                     </>
                                 ) : (
                                         <form onSubmit={handleSubmit(addURL)}>
-                                            <input
+                                            <InputAdd
                                                 placeholder={e}
                                                 name="url"
                                                 ref={register({
@@ -283,40 +291,42 @@ export const Challenger = (props) => {
                                                     required: false
                                                 })}
                                             />
-                                            <input type="submit" />
-                                            <button
+                                            <InputOk type="submit" value="✓" />
+                                            <ButtonNo
                                                 type="button"
                                                 onClick={() => {
                                                     remove(i, inputURL, setInputURL);
                                                 }}
                                             >
-                                                No
-                      </button>
+                                                ✗
+                      </ButtonNo>
                                         </form>
                                     )}
                             </li>
                         );
                     })}
             </ul>
-            <div>
-                <span>Agregar Imagen </span>
+            <FieldContainer>
+                <TopTextLittle>Agregar Imagen </TopTextLittle>
                 <form>
                     <input type="file" />
                     <input type="submit" />
                 </form>
-            </div>
+            </FieldContainer>
 
-            <div>
-                <span>Embeber Imagen </span>
-                <button
-                    type="button"
-                    onClick={() => {
-                        addInput(setInputEbb_IMG, defValueEbb_IMG);
-                    }}
-                >
-                    +
-          </button>
-            </div>
+            <FieldContainer>
+                <AddContainer>
+                    <TopTextLittle>Embeber Imagen </TopTextLittle>
+                    <AddButton
+                        type="button"
+                        onClick={() => {
+                            addInput(setInputEbb_IMG, defValueEbb_IMG);
+                        }}
+                    >
+                        +
+                </AddButton>
+                </AddContainer>
+            </FieldContainer>
             <ul>
                 {inputEbb_IMG.length != 0 &&
                     inputEbb_IMG.map((e, i) => {
@@ -350,7 +360,7 @@ export const Challenger = (props) => {
                                     </>
                                 ) : (
                                         <form onSubmit={handleSubmit(addEbb_IMG)}>
-                                            <input
+                                            <InputAdd
                                                 placeholder={e}
                                                 name="Ebb_img"
                                                 ref={register({
@@ -365,32 +375,34 @@ export const Challenger = (props) => {
                                                     required: false
                                                 })}
                                             />
-                                            <input type="submit" />
-                                            <button
+                                            <InputOk type="submit" value="✓" />
+                                            <ButtonNo
                                                 type="button"
                                                 onClick={() => {
                                                     remove(i, inputEbb_IMG, setInputEbb_IMG);
                                                 }}
                                             >
-                                                No
-                      </button>
+                                                ✗
+                      </ButtonNo>
                                         </form>
                                     )}
                             </li>
                         );
                     })}
             </ul>
-            <div>
-                <span>Embeber Vídeo </span>
-                <button
-                    type="button"
-                    onClick={() => {
-                        addInput(setInputVideo, defValueVideo);
-                    }}
-                >
-                    +
-          </button>
-            </div>
+            <FieldContainer>
+                <AddContainer>
+                    <TopTextLittle>Embeber Vídeo </TopTextLittle>
+                    <AddButton
+                        type="button"
+                        onClick={() => {
+                            addInput(setInputVideo, defValueVideo);
+                        }}
+                    >
+                        +
+                    </AddButton>
+                </AddContainer>
+            </FieldContainer>
             <ul>
                 {inputVideo.length != 0 &&
                     inputVideo.map((e, i) => {
@@ -420,7 +432,7 @@ export const Challenger = (props) => {
                                     </>
                                 ) : (
                                         <form onSubmit={handleSubmit(addVideo)}>
-                                            <input
+                                            <InputAdd
                                                 placeholder={e}
                                                 name="video"
                                                 ref={register({
@@ -435,32 +447,34 @@ export const Challenger = (props) => {
                                                     required: false
                                                 })}
                                             />
-                                            <input type="submit" />
-                                            <button
+                                            <InputOk type="submit" value="✓" />
+                                            <ButtonNo
                                                 type="button"
                                                 onClick={() => {
                                                     remove(i, inputVideo, setInputVideo);
                                                 }}
                                             >
-                                                No
-                      </button>
+                                                ✗
+                      </ButtonNo>
                                         </form>
                                     )}
                             </li>
                         );
                     })}
             </ul>
-            <div>
-                <span>Agregar Pista Gratis </span>
-                <button
-                    type="button"
-                    onClick={() => {
-                        addInput(setInputClue, defValueClue);
-                    }}
-                >
-                    +
-          </button>
-            </div>
+            <FieldContainer>
+                <AddContainer>
+                    <TopTextLittle>Agregar Pista Gratis </TopTextLittle>
+                    <AddButton
+                        type="button"
+                        onClick={() => {
+                            addInput(setInputClue, defValueClue);
+                        }}
+                    >
+                        +
+                     </AddButton>
+                </AddContainer>
+            </FieldContainer>
             <ul>
                 {inputClue.length != 0 &&
                     inputClue.map((e, i) => {
@@ -490,7 +504,7 @@ export const Challenger = (props) => {
                                     </>
                                 ) : (
                                         <form onSubmit={handleSubmit(addClue)}>
-                                            <input
+                                            <InputAdd
                                                 placeholder={e}
                                                 name="clue"
                                                 ref={register({
@@ -505,32 +519,34 @@ export const Challenger = (props) => {
                                                     required: false
                                                 })}
                                             />
-                                            <input type="submit" />
-                                            <button
+                                            <InputOk type="submit" value="✓" />
+                                            <ButtonNo
                                                 type="button"
                                                 onClick={() => {
                                                     remove(i, inputClue, setInputClue);
                                                 }}
                                             >
-                                                No
-                      </button>
+                                                ✗
+                      </ButtonNo>
                                         </form>
                                     )}
                             </li>
                         );
                     })}
             </ul>
-            <div>
-                <span>Agregar Pista Premium </span>
-                <button
-                    type="button"
-                    onClick={() => {
-                        addInput(setInputCluePre, defValueCluePre);
-                    }}
-                >
-                    +
-          </button>
-            </div>
+            <FieldContainer>
+                <AddContainer>
+                    <TopTextLittle>Agregar Pista Premium </TopTextLittle>
+                    <AddButton
+                        type="button"
+                        onClick={() => {
+                            addInput(setInputCluePre, defValueCluePre);
+                        }}
+                    >
+                        +
+                    </AddButton>
+                </AddContainer>
+            </FieldContainer>
             <ul>
                 {inputCluePre.length != 0 &&
                     inputCluePre.map((e, i) => {
@@ -564,7 +580,7 @@ export const Challenger = (props) => {
                                     </>
                                 ) : (
                                         <form onSubmit={handleSubmit(addCluePre)}>
-                                            <input
+                                            <InputAdd
                                                 placeholder={e}
                                                 name="cluePre"
                                                 ref={register({
@@ -579,22 +595,22 @@ export const Challenger = (props) => {
                                                     required: false
                                                 })}
                                             />
-                                            <input type="submit" />
-                                            <button
+                                            <InputOk type="submit" value="✓" />
+                                            <ButtonNo
                                                 type="button"
                                                 onClick={() => {
                                                     remove(i, inputCluePre, setInputCluePre);
                                                 }}
                                             >
-                                                No
-                      </button>
+                                                ✗
+                      </ButtonNo>
                                         </form>
                                     )}
                             </li>
                         );
                     })}
             </ul>
-            <p>Agregar Respuesta</p>
+            <TopTextLittle>Agregar Respuesta</TopTextLittle>
             {!inputAnswer ? (
                 <form onSubmit={handleSubmit(addAnswer)}>
                     <input

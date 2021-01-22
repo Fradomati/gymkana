@@ -5,13 +5,15 @@ import { OrangeButton } from "../../globalStyles/buttons"
 import { RightFlexContainer } from "../../globalStyles/containers"
 
 // Style LFG
-import { ContainerGames } from "./style"
+import { ContainerGames, LiGames, LiGamesDark, Hr } from "./style"
 
 // Services
 import { getAllGamesFN } from "../../services/Generator_Service"
 
 export const LFG = (props) => {
     const [gamesFound, setGamesFound] = useState()
+    const [openBox, setOpenBox] = useState(false)
+
 
 
     const showGames = () => {
@@ -23,22 +25,39 @@ export const LFG = (props) => {
     const close = () => {
         setGamesFound(false)
     }
+    const open = () => {
+        if (openBox == false) {
+            showGames()
+            setOpenBox(true)
+        } else {
+            close()
+            setOpenBox(false)
+        }
+    }
+
+
     console.log("Props del LFG => ", props)
     return (
         <>
             <RightFlexContainer>
-                <OrangeButton type="button" value="Ver juegos" onClick={() => { showGames() }}> Ver Juegos </OrangeButton>
+                <OrangeButton type="button" value="Ver juegos" onClick={() => { open() }}> Ver Juegos </OrangeButton>
                 <OrangeButton type="button" value="Crear" onClick={() => { props.gameState(false) }} > Crear Juego </OrangeButton>
             </RightFlexContainer>
             {gamesFound && (
                 <ContainerGames>
-                    <input type="button" value="Cerrar" onClick={() => { close() }} />
                     <ul>
                         {gamesFound.map((e, i) => {
                             return (
-                                <li key={i} onClick={() => { props.gameState(e) }} >
-                                    {e.title}
-                                </li>
+                                <>
+                                    {i % 2 == 0 ?
+                                        <LiGamesDark key={i} onClick={() => { props.gameState(e) }} >
+                                            {e.title}
+                                        </LiGamesDark>
+                                        :
+                                        <LiGames key={i} onClick={() => { props.gameState(e) }} >
+                                            {e.title}
+                                        </LiGames>}
+                                </>
                             )
                         })}
                     </ul>
@@ -46,7 +65,7 @@ export const LFG = (props) => {
                 </ContainerGames>
             )
             }
-            <hr />
+            <Hr />
         </>
     )
 }
