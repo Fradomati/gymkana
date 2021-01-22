@@ -89,6 +89,8 @@ app.use("/auth", auth);
 const generator = require("./routes/generator");
 app.use("/generator", generator)
 
-
+// Upload Route
+const upload = require("./routes/uploads");
+app.use("/uploads", upload)
 
 module.exports = app;

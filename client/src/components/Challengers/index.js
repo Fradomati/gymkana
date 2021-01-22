@@ -117,7 +117,7 @@ export const Challenger = (props) => {
     };
 
     /* AGREGAR IMÁGENES */
-    const defValueIMG = "Introduce Imágen";
+
 
     const addIMG = (data) => {
         let update = [...inputIMG];
@@ -300,70 +300,12 @@ export const Challenger = (props) => {
             </ul>
             <div>
                 <span>Agregar Imagen </span>
-                <button
-                    type="button"
-                    onClick={() => {
-                        addInput(setInputIMG, defValueIMG);
-                    }}
-                >
-                    +
-          </button>
+                <form>
+                    <input type="file" />
+                    <input type="submit" />
+                </form>
             </div>
-            <ul>
-                {inputIMG.length != 0 &&
-                    inputIMG.map((e, i) => {
-                        return (
-                            <li key={i}>
-                                {inputIMG[i] != defValueIMG ? (
-                                    <>
-                                        <p>{inputIMG[i]}</p>
-                                        <button
-                                            type="button"
-                                            onClick={() => {
-                                                remove(i, inputIMG, setInputIMG);
-                                            }}
-                                        >
-                                            No
-                      </button>
-                                        <div onClick={() => position(i, inputIMG, setInputIMG, -1)}>
-                                            +
-                      </div>
-                                        <div onClick={() => position(i, inputIMG, setInputIMG, 1)}>
-                                            -
-                      </div>
-                                    </>
-                                ) : (
-                                        <form onSubmit={handleSubmit(addIMG)}>
-                                            <input
-                                                placeholder={e}
-                                                name="img"
-                                                ref={register({
-                                                    required: false
-                                                })}
-                                            />
-                                            <input
-                                                style={{ display: "none" }}
-                                                name="id"
-                                                defaultValue={i}
-                                                ref={register({
-                                                    required: false
-                                                })}
-                                            />
-                                            <input type="submit" />
-                                            <button
-                                                type="button"
-                                                onClick={() => {
-                                                    remove(i, inputIMG, setInputIMG);
-                                                }}
-                                            >
-                                                No
-                      </button>
-                                        </form>
-                                    )}
-                            </li>
-                        );
-                    })}
-            </ul>
+
             <div>
                 <span>Embeber Imagen </span>
                 <button

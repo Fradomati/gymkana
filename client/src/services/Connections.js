@@ -17,3 +17,10 @@ export const generatorService = axios.create({
     baseURL: `${process.env.BACKEND_URL}/generator`,
     withCredentials: true
 })
+
+/* Uploads Connection */
+
+export const uploadService = axios.create({
+    baseURL: `${process.env.BACKEND_URL}/uploads`,
+    withCredentials: true
+})
