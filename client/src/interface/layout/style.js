@@ -4,6 +4,7 @@ export const GlobalContainer = styled.div`
     width: 100vw;
     height: 100vh;
     background-color: #f8f1f1;
+    overflow: scroll;
     
 `
 

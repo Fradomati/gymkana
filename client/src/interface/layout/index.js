@@ -7,6 +7,9 @@ import { GlobalContainer, MainContentContainer, ContentContainer } from "./style
 // NavBar
 import { NavBar } from "../navbar/index"
 
+// Footer
+import { Footer } from "../footer/index"
+
 // Context
 // import { UserSessionContext } from "../../../lib/Authentication/withAuthentication"
 
@@ -27,6 +30,7 @@ export const Layout = ({ children }) => {
                     {children}
                 </ContentContainer>
             </MainContentContainer>
+            <Footer />
         </GlobalContainer>
     )
 }
