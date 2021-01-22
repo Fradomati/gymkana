@@ -1,5 +1,12 @@
 import React, { useState } from "react"
 
+// GlobalStyles
+import { OrangeButton } from "../../globalStyles/buttons"
+import { RightFlexContainer } from "../../globalStyles/containers"
+
+// Style LFG
+import { ContainerGames } from "./style"
+
 // Services
 import { getAllGamesFN } from "../../services/Generator_Service"
 
@@ -19,10 +26,13 @@ export const LFG = (props) => {
     console.log("Props del LFG => ", props)
     return (
         <>
-            <input type="button" value="Ver juegos" onClick={() => { showGames() }} />
-            <input type="button" value="Crear" onClick={() => { props.gameState(false) }} />
+            <RightFlexContainer>
+                <OrangeButton type="button" value="Ver juegos" onClick={() => { showGames() }}> Ver Juegos </OrangeButton>
+                <OrangeButton type="button" value="Crear" onClick={() => { props.gameState(false) }} > Crear Juego </OrangeButton>
+            </RightFlexContainer>
             {gamesFound && (
-                <>
+                <ContainerGames>
+                    <input type="button" value="Cerrar" onClick={() => { close() }} />
                     <ul>
                         {gamesFound.map((e, i) => {
                             return (
@@ -32,8 +42,8 @@ export const LFG = (props) => {
                             )
                         })}
                     </ul>
-                    <input type="button" value="Cerrar" onClick={() => { close() }} />
-                </>
+
+                </ContainerGames>
             )
             }
             <hr />

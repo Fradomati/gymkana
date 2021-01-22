@@ -6,43 +6,44 @@ import "quill/dist/quill.snow.css"
 import { EditorContainerQuill } from "./style"
 
 export const TextRichDescription = (props) => {
+    console.log(props.state, "state");
     const modules = {
         toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
+            ["bold", "italic", "underline", "strike"],
             [{ align: [] }],
 
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            [{ indent: '-1' }, { indent: '+1' }],
+            [{ list: "ordered" }, { list: "bullet" }],
+            [{ indent: "-1" }, { indent: "+1" }],
 
-            [{ size: ['small', false, 'large', 'huge'] }],
+            [{ size: ["small", false, "large", "huge"] }],
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            ['link'],
+            ["link"],
             [{ color: [] }, { background: [] }],
 
-            ['clean'],
+            ["clean"]
         ],
         clipboard: {
-            matchVisual: false,
-        },
-    }
+            matchVisual: false
+        }
+    };
 
-    const { quill, quillRef } = useQuill({ modules })
-    useEffect(() => {
-        quill.root.innerHTML = `<p>Hola</p>`
-    }, [])
+    const { quill, quillRef } = useQuill({ modules });
 
     useEffect(() => {
         if (quill) {
-            quill.on('text-change', () => {
-                console.log('Text change!', quill.root.innerHTML);
-            })
+            if (props.state) {
+                quill.clipboard.dangerouslyPasteHTML(`${props.state}`);
+            }
+            quill.on("text-change", () => {
+                console.log("Text change!", quill.root.innerHTML);
+                props.setState(quill.root.innerHTML);
+            });
         }
-    }, [quill])
-
+    }, [quill]);
 
     return (
-        <EditorContainerQuill >
-            <div ref={quillRef} defaultValue={`<p>Hola</p>`} />
+        <EditorContainerQuill>
+            <div ref={quillRef} />
         </EditorContainerQuill>
-    )
-}
+    );
+};
