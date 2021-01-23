@@ -3,10 +3,21 @@ import { useForm } from "react-hook-form"
 import { TextRichDescription } from "../RichTextArea/index-quill"
 
 // Styles Challengers 
-import { CounterProof, TopTextLittle, AddContainer, FieldContainer, InputAdd, InputOk, ButtonNo } from "./style"
+import {
+    CounterProof,
+    TopTextLittle,
+    AddContainer,
+    FieldContainer,
+    InputAdd,
+    InputAll,
+    InputOk,
+    ButtonNo,
+    ButtonStore,
+    InputStore,
+} from "./style"
 
 // Styles Global
-import { AddButton } from "../../globalStyles/buttons"
+import { AddButton, OrangeButton, OrangeInput } from "../../globalStyles/buttons"
 
 export const Challenger = (props) => {
     const [inputURL, setInputURL] = useState([]);
@@ -190,27 +201,27 @@ export const Challenger = (props) => {
             <TopTextLittle>Agregar Título</TopTextLittle>
             {!inputTitle ? (
                 <form onSubmit={handleSubmit(addTitle)}>
-                    <input
+                    <InputAll
                         placeholder={defValueTitle}
                         name="title"
                         ref={register({
                             required: false
                         })}
                     />
-                    <input type="submit" />
+                    <OrangeInput type="submit" />
                 </form>
             ) : (
                     <div>
                         {!titleEdited ? (
                             <>
                                 {inputTitle}
-                                <button type="button" onClick={() => setTitleEdited(inputTitle)}>
+                                <OrangeButton type="button" onClick={() => setTitleEdited(inputTitle)}>
                                     Editar
-                </button>
+                </OrangeButton>
                             </>
                         ) : (
                                 <form onSubmit={handleSubmit(editTitle)}>
-                                    <input
+                                    <InputAll
                                         defaultValue={inputTitle}
                                         name="title"
                                         ref={register({
