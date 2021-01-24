@@ -17,6 +17,12 @@ display: flex;
 justify-content: center;
 `
 
+export const FlexBtwContainer = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+`
+
 // SPACES
 
 export const SpaceOne = styled.div`
