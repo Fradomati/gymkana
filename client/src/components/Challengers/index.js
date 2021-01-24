@@ -14,10 +14,14 @@ import {
     ButtonNo,
     ButtonStore,
     InputStore,
+    DivStored,
+    ChallengerContainer,
+    Move
 } from "./style"
 
 // Styles Global
 import { AddButton, OrangeButton, OrangeInput } from "../../globalStyles/buttons"
+import { FlexBtwContainer } from "../../globalStyles/containers"
 
 export const Challenger = (props) => {
     const [inputURL, setInputURL] = useState([]);
@@ -196,7 +200,7 @@ export const Challenger = (props) => {
     };
 
     return (
-        <>
+        <ChallengerContainer>
             <CounterProof>PRUEBA {counter}</CounterProof>
             <TopTextLittle>Agregar Título</TopTextLittle>
             {!inputTitle ? (
@@ -208,17 +212,17 @@ export const Challenger = (props) => {
                             required: false
                         })}
                     />
-                    <OrangeInput type="submit" />
+                    <InputStore type="submit" value="Guardar" />
                 </form>
             ) : (
                     <div>
                         {!titleEdited ? (
-                            <>
-                                {inputTitle}
-                                <OrangeButton type="button" onClick={() => setTitleEdited(inputTitle)}>
+                            <FlexBtwContainer>
+                                <DivStored>{inputTitle}</DivStored>
+                                <ButtonStore type="button" onClick={() => setTitleEdited(inputTitle)}>
                                     Editar
-                </OrangeButton>
-                            </>
+                </ButtonStore>
+                            </FlexBtwContainer>
                         ) : (
                                 <form onSubmit={handleSubmit(editTitle)}>
                                     <InputAll
@@ -228,7 +232,7 @@ export const Challenger = (props) => {
                                             required: false
                                         })}
                                     />
-                                    <input type="submit" />
+                                    <InputStore type="submit" value="Guardar" />
                                 </form>
                             )}
                     </div>
@@ -268,23 +272,26 @@ export const Challenger = (props) => {
                         return (
                             <li key={i}>
                                 {inputURL[i] != defValueURL ? (
-                                    <>
-                                        <p>{inputURL[i]}</p>
-                                        <button
+                                    <FlexBtwContainer>
+                                        <DivStored>{inputURL[i]}</DivStored>
+
+
+                                        <ButtonNo
                                             type="button"
                                             onClick={() => {
                                                 remove(i, inputURL, setInputURL);
                                             }}
                                         >
-                                            No
-                      </button>
-                                        <div onClick={() => position(i, inputURL, setInputURL, -1)}>
-                                            +
-                      </div>
-                                        <div onClick={() => position(i, inputURL, setInputURL, 1)}>
-                                            -
-                      </div>
-                                    </>
+                                            ✗
+                      </ButtonNo>
+                                        <Move onClick={() => position(i, inputURL, setInputURL, -1)}>
+                                            <div> +</div>
+                                        </Move>
+                                        <Move onClick={() => position(i, inputURL, setInputURL, 1)}>
+                                            <div> -</div>
+                                        </Move>
+
+                                    </FlexBtwContainer>
                                 ) : (
                                         <form onSubmit={handleSubmit(addURL)}>
                                             <InputAdd
@@ -624,37 +631,37 @@ export const Challenger = (props) => {
             <TopTextLittle>Agregar Respuesta</TopTextLittle>
             {!inputAnswer ? (
                 <form onSubmit={handleSubmit(addAnswer)}>
-                    <input
+                    <InputAll
                         placeholder={defValueAnswer}
                         name="answer"
                         ref={register({
                             required: false
                         })}
                     />
-                    <input type="submit" />
+                    <InputStore type="submit" value="Guardar" />
                 </form>
             ) : (
                     <div>
                         {!answerEdited ? (
-                            <>
-                                {inputAnswer}
-                                <button
+                            <FlexBtwContainer>
+                                <DivStored>{inputAnswer}</DivStored>
+                                <ButtonStore
                                     type="button"
                                     onClick={() => setAnswerEdited(inputAnswer)}
                                 >
                                     Editar
-                </button>
-                            </>
+                </ButtonStore>
+                            </FlexBtwContainer>
                         ) : (
                                 <form onSubmit={handleSubmit(editAnswer)}>
-                                    <input
+                                    <InputAll
                                         defaultValue={inputAnswer}
                                         name="answer"
                                         ref={register({
                                             required: false
                                         })}
                                     />
-                                    <input type="submit" />
+                                    <InputStore type="submit" value="Guardar" />
                                 </form>
                             )}
                     </div>
@@ -669,6 +676,6 @@ export const Challenger = (props) => {
                     props.setAddState(false);
                 }}
             />
-        </>
+        </ChallengerContainer>
     );
 };

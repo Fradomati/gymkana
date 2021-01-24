@@ -45,22 +45,20 @@ export const LFG = (props) => {
             </RightFlexContainer>
             {gamesFound && (
                 <ContainerGames>
-                    <ul>
-                        {gamesFound.map((e, i) => {
-                            return (
-                                <>
-                                    {i % 2 == 0 ?
-                                        <LiGamesDark key={i} onClick={() => { props.gameState(e) }} >
-                                            {e.title}
-                                        </LiGamesDark>
-                                        :
-                                        <LiGames key={i} onClick={() => { props.gameState(e) }} >
-                                            {e.title}
-                                        </LiGames>}
-                                </>
-                            )
-                        })}
-                    </ul>
+                    {gamesFound.map((e, i) => {
+                        return (
+                            <ul key={i}>
+                                {i % 2 == 0 ?
+                                    <LiGamesDark onClick={() => { props.gameState(e) }} >
+                                        {e.title}
+                                    </LiGamesDark>
+                                    :
+                                    <LiGames onClick={() => { props.gameState(e) }} >
+                                        {e.title}
+                                    </LiGames>}
+                            </ul>
+                        )
+                    })}
 
                 </ContainerGames>
             )
