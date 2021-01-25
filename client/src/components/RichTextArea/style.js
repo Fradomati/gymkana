@@ -10,8 +10,6 @@ export const EditorContainer = styled.div`
 // Quilljs
 
 export const EditorContainerQuill = styled.div`
-    width: 95%;
     height: 30vh;
-    margin: 3%;
     margin-bottom:4em;
 `

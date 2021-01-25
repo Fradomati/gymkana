@@ -110,11 +110,11 @@ textarea:focus, input:focus, button:focus{
 /* ----- Rich Editor ----- */
 
 .ql-toolbar.ql-snow {
-    border: 2px solid #D32F2F !important;
-	border-radius: 5px 5px 0px 0px !important;
+	background-color: white;
+	margin-bottom: 5px;
+
 }
 
 .ql-editor {
-    border: 2px solid #D32F2F !important;
-	margin-top: 1px !important; 
+	background-color: white;
 }

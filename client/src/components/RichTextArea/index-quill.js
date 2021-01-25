@@ -6,7 +6,6 @@ import "quill/dist/quill.snow.css"
 import { EditorContainerQuill } from "./style"
 
 export const TextRichDescription = (props) => {
-    console.log(props.state, "state");
     const modules = {
         toolbar: [
             ["bold", "italic", "underline", "strike"],
@@ -35,7 +34,6 @@ export const TextRichDescription = (props) => {
                 quill.clipboard.dangerouslyPasteHTML(`${props.state}`);
             }
             quill.on("text-change", () => {
-                console.log("Text change!", quill.root.innerHTML);
                 props.setState(quill.root.innerHTML);
             });
         }
