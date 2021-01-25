@@ -49,11 +49,11 @@ export const LFG = (props) => {
                         return (
                             <ul key={i}>
                                 {i % 2 == 0 ?
-                                    <LiGamesDark onClick={() => { props.gameState(e) }} >
+                                    <LiGamesDark onClick={() => { props.gameState(e), setGamesFound(false), setOpenBox(false) }} >
                                         {e.title}
                                     </LiGamesDark>
                                     :
-                                    <LiGames onClick={() => { props.gameState(e) }} >
+                                    <LiGames onClick={() => { props.gameState(e), setGamesFound(false), setOpenBox(false) }} >
                                         {e.title}
                                     </LiGames>}
                             </ul>

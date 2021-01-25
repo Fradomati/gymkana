@@ -36,6 +36,22 @@ export const OrangeButton = styled.button`
  
     }
 `
+export const GreyButton = styled.button`
+    padding: 0.3em;
+    border-radius: 5px;
+    border: none;
+    background-color: #grey;
+    color: #2b2b2b;
+    box-shadow: 0px 0px 1px 1px #88878791;
+    cursor: pointer;
+    margin: 0 0.3em;
+
+    &:hover {
+        box-shadow: 0px 0px 4px 1px #888787;
+ 
+    }
+`
+
 
 export const AddButton = styled.button`
 border-radius: 50%;

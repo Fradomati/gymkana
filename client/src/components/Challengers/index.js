@@ -20,8 +20,8 @@ import {
 } from "./style"
 
 // Styles Global
-import { AddButton, OrangeButton, OrangeInput } from "../../globalStyles/buttons"
-import { FlexBtwContainer } from "../../globalStyles/containers"
+import { AddButton, OrangeButton, GreyButton } from "../../globalStyles/buttons"
+import { FlexBtwContainer, CenterFlexContainer } from "../../globalStyles/containers"
 
 export const Challenger = (props) => {
     const [inputURL, setInputURL] = useState([]);
@@ -88,8 +88,10 @@ export const Challenger = (props) => {
     /* AGREGAR TÍTULO */
     const defValueTitle = "Introducir Título de la Prueba";
     const addTitle = (data) => {
-        const title = data.title;
-        setInputTitle(title);
+        if (data.title != "") {
+            const title = data.title;
+            setInputTitle(title);
+        }
     };
 
     /* EDITAR TÍTULO */
@@ -100,19 +102,14 @@ export const Challenger = (props) => {
     };
 
     /* AGREGAR DESCRIPCIÓN */
-    const defValueDescription = "Introducir Descripción";
+    //const defValueDescription = "Introducir Descripción";
     const [storeDes, setStoreDes] = useState(false);
-    const addDescription = (data) => {
-        const description = data.description;
-        setInputDescription(description);
-    };
-
-    /* EDITAR TÍTULO */
-    // const editDescription = (data) => {
+    // const addDescription = (data) => {
     //     const description = data.description;
     //     setInputDescription(description);
-    //     setDescriptionEdited();
     // };
+
+
 
     /* AGREGAR RESPUESTA */
     const defValueAnswer = "Introducir Respuesta";
@@ -133,8 +130,10 @@ export const Challenger = (props) => {
 
     const addURL = (data) => {
         let update = [...inputURL];
-        update[data.id] = data.url;
-        setInputURL(update);
+        if (data.url != "") {
+            update[data.id] = data.url;
+            setInputURL(update);
+        }
     };
 
     /* AGREGAR IMÁGENES */
@@ -151,8 +150,10 @@ export const Challenger = (props) => {
 
     const addVideo = (data) => {
         let update = [...inputVideo];
-        update[data.id] = data.video;
-        setInputVideo(update);
+        if (data.video != "") {
+            update[data.id] = data.video;
+            setInputVideo(update);
+        }
     };
 
     /* EMBEBER IMÁGENES */
@@ -160,8 +161,10 @@ export const Challenger = (props) => {
 
     const addEbb_IMG = (data) => {
         let update = [...inputEbb_IMG];
-        update[data.id] = data.Ebb_img;
-        setInputEbb_IMG(update);
+        if (data.Ebb_img != "") {
+            update[data.id] = data.Ebb_img;
+            setInputEbb_IMG(update);
+        }
     };
 
     /* AGREGAR PISTAS GRATIS */
@@ -169,8 +172,10 @@ export const Challenger = (props) => {
 
     const addClue = (data) => {
         let update = [...inputClue];
-        update[data.id] = data.clue;
-        setInputClue(update);
+        if (data.clue != "") {
+            update[data.id] = data.clue;
+            setInputClue(update);
+        }
     };
 
     /* AGREGAR PISTAS PREMIUM */
@@ -178,8 +183,10 @@ export const Challenger = (props) => {
 
     const addCluePre = (data) => {
         let update = [...inputCluePre];
-        update[data.id] = data.cluePre;
-        setInputCluePre(update);
+        if (data.cluePre) {
+            update[data.id] = data.cluePre;
+            setInputCluePre(update);
+        }
     };
 
     /* GUARDAR */
@@ -202,7 +209,7 @@ export const Challenger = (props) => {
     return (
         <ChallengerContainer>
             <CounterProof>PRUEBA {counter}</CounterProof>
-            <TopTextLittle>Agregar Título</TopTextLittle>
+            <TopTextLittle>Título</TopTextLittle>
             {!inputTitle ? (
                 <form onSubmit={handleSubmit(addTitle)}>
                     <InputAll
@@ -237,19 +244,19 @@ export const Challenger = (props) => {
                             )}
                     </div>
                 )}
-            <TopTextLittle>Agregar Descripción</TopTextLittle>
+            <TopTextLittle>Descripción</TopTextLittle>
             {storeDes ? (
                 <>
                     <TextRichDescription
                         state={inputDescription}
                         setState={setInputDescription}
                     />
-                    <button onClick={() => setStoreDes(false)}>Guardar</button>
+                    <ButtonStore type="button" onClick={() => setStoreDes(false)} style={{ marginTop: "15px" }}>Guardar</ButtonStore>
                 </>
             ) : (
                     <>
-                        <div dangerouslySetInnerHTML={{ __html: inputDescription }}></div>
-                        <button onClick={() => setStoreDes(true)}>+</button>
+                        <DivStored dangerouslySetInnerHTML={{ __html: inputDescription }} style={{ width: "100%" }}></DivStored>
+                        <ButtonStore type="button" onClick={() => setStoreDes(true)} style={{ height: "2em" }}>▶</ButtonStore>
                     </>
                 )}
 
@@ -285,10 +292,10 @@ export const Challenger = (props) => {
                                             ✗
                       </ButtonNo>
                                         <Move onClick={() => position(i, inputURL, setInputURL, -1)}>
-                                            <div> +</div>
+                                            <div> ▴</div>
                                         </Move>
                                         <Move onClick={() => position(i, inputURL, setInputURL, 1)}>
-                                            <div> -</div>
+                                            <div> ▾</div>
                                         </Move>
 
                                     </FlexBtwContainer>
@@ -351,31 +358,31 @@ export const Challenger = (props) => {
                         return (
                             <li key={i}>
                                 {inputEbb_IMG[i] != defValueEbb_IMG ? (
-                                    <>
-                                        <p>{inputEbb_IMG[i]}</p>
-                                        <button
+                                    <FlexBtwContainer>
+                                        <DivStored>{inputEbb_IMG[i]}</DivStored>
+                                        <ButtonNo
                                             type="button"
                                             onClick={() => {
                                                 remove(i, inputEbb_IMG, setInputEbb_IMG);
                                             }}
                                         >
-                                            No
-                      </button>
-                                        <div
+                                            ✗
+                      </ButtonNo>
+                                        <Move
                                             onClick={() =>
                                                 position(i, inputEbb_IMG, setInputEbb_IMG, -1)
                                             }
                                         >
-                                            +
-                      </div>
-                                        <div
+                                            ▴
+                      </Move>
+                                        <Move
                                             onClick={() =>
                                                 position(i, inputEbb_IMG, setInputEbb_IMG, 1)
                                             }
                                         >
-                                            -
-                      </div>
-                                    </>
+                                            ▾
+                      </Move>
+                                    </FlexBtwContainer>
                                 ) : (
                                         <form onSubmit={handleSubmit(addEbb_IMG)}>
                                             <InputAdd
@@ -427,27 +434,27 @@ export const Challenger = (props) => {
                         return (
                             <li key={i}>
                                 {inputVideo[i] != defValueVideo ? (
-                                    <>
-                                        <p>{inputVideo[i]}</p>
-                                        <button
+                                    <FlexBtwContainer>
+                                        <DivStored>{inputVideo[i]}</DivStored>
+                                        <ButtonNo
                                             type="button"
                                             onClick={() => {
                                                 remove(i, inputVideo, setInputVideo);
                                             }}
                                         >
-                                            No
-                      </button>
-                                        <div
+                                            ✗
+                      </ButtonNo>
+                                        <Move
                                             onClick={() => position(i, inputVideo, setInputVideo, -1)}
                                         >
-                                            +
-                      </div>
-                                        <div
+                                            ▴
+                      </Move>
+                                        <Move
                                             onClick={() => position(i, inputVideo, setInputVideo, 1)}
                                         >
-                                            -
-                      </div>
-                                    </>
+                                            ▾
+                      </Move>
+                                    </FlexBtwContainer>
                                 ) : (
                                         <form onSubmit={handleSubmit(addVideo)}>
                                             <InputAdd
@@ -499,27 +506,27 @@ export const Challenger = (props) => {
                         return (
                             <li key={i}>
                                 {inputClue[i] != defValueClue ? (
-                                    <>
-                                        <p>{inputClue[i]}</p>
-                                        <button
+                                    <FlexBtwContainer>
+                                        <DivStored>{inputClue[i]}</DivStored>
+                                        <ButtonNo
                                             type="button"
                                             onClick={() => {
                                                 remove(i, inputClue, setInputClue);
                                             }}
                                         >
-                                            No
-                      </button>
-                                        <div
+                                            ✗
+                      </ButtonNo>
+                                        <Move
                                             onClick={() => position(i, inputClue, setInputClue, -1)}
                                         >
-                                            +
-                      </div>
-                                        <div
+                                            ▴
+                      </Move>
+                                        <Move
                                             onClick={() => position(i, inputClue, setInputClue, 1)}
                                         >
-                                            -
-                      </div>
-                                    </>
+                                            ▾
+                      </Move>
+                                    </FlexBtwContainer>
                                 ) : (
                                         <form onSubmit={handleSubmit(addClue)}>
                                             <InputAdd
@@ -571,31 +578,31 @@ export const Challenger = (props) => {
                         return (
                             <li key={i}>
                                 {inputCluePre[i] != defValueCluePre ? (
-                                    <>
-                                        <p>{inputCluePre[i]}</p>
-                                        <button
+                                    <FlexBtwContainer>
+                                        <DivStored>{inputCluePre[i]}</DivStored>
+                                        <ButtonNo
                                             type="button"
                                             onClick={() => {
                                                 remove(i, inputCluePre, setInputCluePre);
                                             }}
                                         >
-                                            No
-                      </button>
-                                        <div
+                                            ✗
+                      </ButtonNo>
+                                        <Move
                                             onClick={() =>
                                                 position(i, inputCluePre, setInputCluePre, -1)
                                             }
                                         >
-                                            +
-                      </div>
-                                        <div
+                                            ▴
+                      </Move>
+                                        <Move
                                             onClick={() =>
                                                 position(i, inputCluePre, setInputCluePre, 1)
                                             }
                                         >
-                                            -
-                      </div>
-                                    </>
+                                            ▾
+                      </Move>
+                                    </FlexBtwContainer>
                                 ) : (
                                         <form onSubmit={handleSubmit(addCluePre)}>
                                             <InputAdd
@@ -666,16 +673,19 @@ export const Challenger = (props) => {
                             )}
                     </div>
                 )}
-            <button type="button" onClick={() => storeChallenger()}>
-                Guardar
-        </button>
-            <input
-                type="button"
-                value="Cerrar"
-                onClick={() => {
-                    props.setAddState(false);
-                }}
-            />
+
+            <CenterFlexContainer>
+
+                <OrangeButton type="button" onClick={() => storeChallenger()}>
+                    Guardar
+        </OrangeButton>
+                <GreyButton
+                    type="button"
+                    onClick={() => {
+                        props.setAddState(false);
+                    }}
+                >Cancelar</GreyButton>
+            </CenterFlexContainer>
         </ChallengerContainer>
     );
 };
