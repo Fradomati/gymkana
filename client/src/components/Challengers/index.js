@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form"
 import { TextRichDescription } from "../RichTextArea/index-quill"
 
+// Services
+import { addChallengerFN } from "../../services/Challenger_Services"
+
 // Styles Challengers 
 import {
     CounterProof,
@@ -193,7 +196,7 @@ export const Challenger = (props) => {
 
     const storeChallenger = () => {
         const values = {
-            game_id: "xxx",
+            game_id: props.id,
             title: inputTitle,
             description: inputDescription,
             urls: inputURL,
@@ -205,6 +208,7 @@ export const Challenger = (props) => {
         };
 
         console.log(values);
+        addChallengerFN(values)
     };
 
     return (

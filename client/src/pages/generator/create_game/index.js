@@ -109,7 +109,7 @@ export const CreateGame = () => {
                 <AddButton type="button" onClick={() => { setAddCGER(true) }}>+</AddButton>
                 {addCGER && (
                     <ContainerForm>
-                        <Challenger counter={counter(game.challengers)} setAddState={setAddCGER} />
+                        <Challenger counter={counter(game.challengers)} setAddState={setAddCGER} id={game._id} />
                     </ContainerForm>
                 )}
             </>
