@@ -18,3 +18,4 @@ export const getAllGamesFN = async () => {
     const response = await generatorService.get("/findAll")
     return response.data
 }
+

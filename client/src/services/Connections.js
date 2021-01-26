@@ -18,6 +18,13 @@ export const generatorService = axios.create({
     withCredentials: true
 })
 
+/* Challenger Connection */
+
+export const challengerService = axios.create({
+    baseURL: `${process.env.BACKEND_URL}/challenger`,
+    withCredentials: true
+})
+
 /* Uploads Connection */
 
 export const uploadService = axios.create({

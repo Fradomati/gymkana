@@ -193,6 +193,7 @@ export const Challenger = (props) => {
 
     const storeChallenger = () => {
         const values = {
+            game_id: "xxx",
             title: inputTitle,
             description: inputDescription,
             urls: inputURL,

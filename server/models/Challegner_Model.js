@@ -7,7 +7,7 @@ const ChallengerModel = new Schema(
         game_id: { type: Schema.Types.ObjectId, ref: "Game" },
         title: String,
         description: String,
-        url: String,
+        url: { type: Array },
         images: { type: Array },
         images_Embed: { type: Array },
         video_Embed: { type: Array },
