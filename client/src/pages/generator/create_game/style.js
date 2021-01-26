@@ -12,6 +12,10 @@ text-align: center;
 
 export const ContainerForm = styled.div`
     margin-top: 1em;
+        padding: 0.5em;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px 0px #888888ad;
+    background-color: #e2dede;
 `
 
 export const TopText = styled.div`

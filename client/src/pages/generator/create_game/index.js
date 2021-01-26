@@ -9,7 +9,7 @@ import { TitlePage, TopText, ContainerForm, Input, Select, SelectContainer } fro
 
 // Styles Global
 import { LeftFlexContainer, CenterFlexContainer, SpaceOne } from "../../../globalStyles/containers"
-import { OrangeInput } from "../../../globalStyles/buttons"
+import { OrangeInput, AddButton } from "../../../globalStyles/buttons"
 
 // LFG 
 import { LFG } from "../../../components/LFG/index"
@@ -45,6 +45,7 @@ export const CreateGame = () => {
         }
     }
 
+    console.log(game)
     if (!game) {
         return (
             <>
@@ -94,7 +95,18 @@ export const CreateGame = () => {
                 <LFG gameState={setGame} />
                 <TitlePage>{game.title}</TitlePage>
                 <div>Número de Pruebas: {counter(game.challengers)}</div>
-                <input type="button" value="Añadir Prueba" onClick={() => { setAddCGER(true) }} />
+                <div>Categorías: {game.category.map((e, i) => {
+                    return (
+                        <div key={i}>{e}</div>
+                    )
+                })} </div>
+                <div>Etiquetas: {game.tags.map((e, i) => {
+                    return (
+                        <div key={i}>{e}</div>
+                    )
+                })} </div>
+                <div>Pruebas</div>
+                <AddButton type="button" onClick={() => { setAddCGER(true) }}>+</AddButton>
                 {addCGER && (
                     <ContainerForm>
                         <Challenger counter={counter(game.challengers)} setAddState={setAddCGER} />
