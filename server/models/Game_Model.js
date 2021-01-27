@@ -10,8 +10,9 @@ const GameModel = new Schema(
         tags: { type: Array },
         ranking: [{ type: Schema.Types.ObjectId, ref: "User" }],
         challengers: [{ type: Schema.Types.ObjectId, ref: "Challenger" }],
-        date: Date,
+        schedule_day: { type: Date },
         share_url: String,
+        date_creation: { type: Date, default: Date.now },
 
     },
     {
