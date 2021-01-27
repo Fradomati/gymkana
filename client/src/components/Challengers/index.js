@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form"
 import { TextRichDescription } from "../RichTextArea/index-quill"
 
+// Services
+import { addChallengerFN } from "../../services/Challenger_Services"
+
 // Styles Challengers 
 import {
     CounterProof,
@@ -22,6 +25,7 @@ import {
 // Styles Global
 import { AddButton, OrangeButton, GreyButton } from "../../globalStyles/buttons"
 import { FlexBtwContainer, CenterFlexContainer } from "../../globalStyles/containers"
+import { ErrorMessageRed } from "../../globalStyles/messages"
 
 export const Challenger = (props) => {
     const [inputURL, setInputURL] = useState([]);
@@ -35,8 +39,9 @@ export const Challenger = (props) => {
     const [inputAnswer, setInputAnswer] = useState();
     // Edit fiels - provisional solution
     const [titleEdited, setTitleEdited] = useState();
-    const [descriptionEdited, setDescriptionEdited] = useState();
     const [answerEdited, setAnswerEdited] = useState();
+    // Error message
+    const [errorVoidInput, setErrorVoidInput] = useState(false)
 
     const counter = props.counter + 1;
 
@@ -193,6 +198,7 @@ export const Challenger = (props) => {
 
     const storeChallenger = () => {
         const values = {
+            game_id: props.id,
             title: inputTitle,
             description: inputDescription,
             urls: inputURL,
@@ -203,7 +209,19 @@ export const Challenger = (props) => {
             answer: inputAnswer
         };
 
+        if (values.title === undefined) {
+            setErrorVoidInput("Falta rellenar el campo del Título")
+        } else if (values.description === undefined) {
+            setErrorVoidInput("Falta rellenar el campo de Descripción")
+        } else if (values.answer === undefined) {
+            setErrorVoidInput("Falta rellenar el campo del Respuesta")
+        } else {
+            addChallengerFN(values)
+            setErrorVoidInput(false)
+        }
+
         console.log(values);
+
     };
 
     return (
@@ -673,9 +691,8 @@ export const Challenger = (props) => {
                             )}
                     </div>
                 )}
-
+            {errorVoidInput && (<ErrorMessageRed>⚠️{errorVoidInput} ⚠️</ErrorMessageRed>)}
             <CenterFlexContainer>
-
                 <OrangeButton type="button" onClick={() => storeChallenger()}>
                     Guardar
         </OrangeButton>

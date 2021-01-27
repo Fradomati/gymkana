@@ -89,6 +89,10 @@ app.use("/auth", auth);
 const generator = require("./routes/generator");
 app.use("/generator", generator)
 
+// Generator Route
+const challenger = require("./routes/challenger");
+app.use("/challenger", challenger)
+
 // Upload Route
 const upload = require("./routes/uploads");
 app.use("/uploads", upload)

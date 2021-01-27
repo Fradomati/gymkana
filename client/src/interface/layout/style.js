@@ -20,6 +20,7 @@ align-items: center;
 
 export const ContentContainer = styled.div`
 width: 70%;
-height: 80%;
-padding: 1em;
+height: 100%;
+padding-top: 20em;
+margin-bottom: 10em;
 `
