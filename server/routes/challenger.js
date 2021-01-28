@@ -23,10 +23,10 @@ router.post("/addChallenger", async (req, res) => {
             premiumClue,
             answer
         })
-        console.log(`Nuevo juego creado ${newChallenger.title}`)
+        console.log(`Nuevo reto creado ${newChallenger.title}`)
         res.json({ status: 200, newChallenger: newChallenger })
     } else {
-        res.json({ status: 500, message: "Ya existe un juego con este nombre" })
+        res.json({ status: 500, message: "Ya existe un reto con este nombre" })
     }
 })
 
