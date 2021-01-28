@@ -4,6 +4,7 @@ import { TextRichDescription } from "../RichTextArea/index-quill"
 
 // Services
 import { addChallengerFN } from "../../services/Challenger_Services"
+import { addNewChallengertoGame } from "../../services/Generator_Service"
 
 // Styles Challengers 
 import {
@@ -216,8 +217,20 @@ export const Challenger = (props) => {
         } else if (values.answer === undefined) {
             setErrorVoidInput("Falta rellenar el campo del Respuesta")
         } else {
-            addChallengerFN(values)
+            // create new challenger
+            addChallengerFN(values).then(res => {
+                console.log("RES", res)
+                addNewChallengertoGame({ challenger_id: res.newChallenger._id, game_id: res.newChallenger.game_id })
+            }
+            )
+
+            // reset the error message
             setErrorVoidInput(false)
+
+            // If the challenger is new, add to the Game
+
+
+
         }
 
         console.log(values);

@@ -25,6 +25,14 @@ router.post("/createGame", async (req, res) => {
     }
 })
 
+router.post("/addNewChallengertoGame", async (req, res) => {
+    const { challenger_id, game_id } = req.body
+
+    const addNewChallenger = await Game.findByIdAndUpdate({ id: game_id }, {
+        // SEGUIR AQUí
+    })
+})
+
 router.get("/findAll", async (req, res) => {
 
     await Game.find({}, (err, result) => {
