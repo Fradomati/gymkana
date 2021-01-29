@@ -106,10 +106,19 @@ export const CreateGame = () => {
                     )
                 })} </div>
                 <div>Pruebas</div>
+                <ul>
+                    {
+                        game.challengers.map((e, i) => {
+                            return (
+                                <li key={i}>{i + 1}</li>
+                            )
+                        })
+                    }
+                </ul>
                 <AddButton type="button" onClick={() => { setAddCGER(true) }}>+</AddButton>
                 {addCGER && (
                     <ContainerForm>
-                        <Challenger counter={counter(game.challengers)} setAddState={setAddCGER} id={game._id} />
+                        <Challenger counter={counter(game.challengers)} setChallengerState={setAddCGER} setGameState={setGame} id={game._id} />
                     </ContainerForm>
                 )}
             </>
