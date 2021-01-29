@@ -39,3 +39,24 @@ export const Select = styled.select`
 export const SelectContainer = styled.div`
     margin-right: 1em
 `
+
+export const UlChallengerList = styled.ul`
+display: flex;
+justify-content: space-evenly;
+`
+
+export const LiChallengerListElement = styled.li`
+display: flex;
+padding: 0.5em;
+width: 15px;
+height: 15px;
+border: 1px solid #db6400;
+border-radius: 100%;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+&:hover{
+    background-color: #ffa62b
+};
+
+`

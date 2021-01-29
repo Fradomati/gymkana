@@ -239,7 +239,7 @@ export const Challenger = (props) => {
             // reset error message
             setErrorMessage(false)
             // If all its ok, close de current form
-            if (!errorMessage) props.setChallengerState(false)
+            // if (!errorMessage) props.setChallengerState(false)
         }
 
         console.log(values);
