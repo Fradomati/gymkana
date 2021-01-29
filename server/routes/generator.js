@@ -28,12 +28,14 @@ router.post("/createGame", async (req, res) => {
 router.post("/addNewChallengertoGame", async (req, res) => {
     const { challenger_id, game_id } = req.body
 
-    const addNewChallenger = await Game.findByIdAndUpdate(
+    await Game.findByIdAndUpdate(
         { _id: game_id },
         {
             $push: { challengers: challenger_id }
         })
-
+    const addNewChallenger = await Game.findById({
+        _id: game_id
+    })
     if (addNewChallenger) {
         res.json({ status: 200, addNewChallenger })
     } else {

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form"
 
 // Services
 import { createGameFN } from "../../../services/Generator_Service"
 
 // Styles Create_Game
-import { TitlePage, TopText, ContainerForm, Input, Select, SelectContainer } from "./style"
+import { TitlePage, TopText, ContainerForm, Input, Select, SelectContainer, UlChallengerList, LiChallengerListElement } from "./style"
 
 // Styles Global
 import { LeftFlexContainer, CenterFlexContainer, SpaceOne } from "../../../globalStyles/containers"
@@ -44,6 +44,11 @@ export const CreateGame = () => {
             setErrorGame(response.message)
         }
     }
+
+    useEffect(() => {
+        console.log("ASDASDAKMFAF", game)
+        setAddCGER(false)
+    }, [game])
 
     console.log(game)
     if (!game) {
@@ -106,15 +111,15 @@ export const CreateGame = () => {
                     )
                 })} </div>
                 <div>Pruebas</div>
-                <ul>
+                <UlChallengerList>
                     {
                         game.challengers.map((e, i) => {
                             return (
-                                <li key={i}>{i + 1}</li>
+                                <LiChallengerListElement key={i}>{i + 1}</LiChallengerListElement>
                             )
                         })
                     }
-                </ul>
+                </UlChallengerList>
                 <AddButton type="button" onClick={() => { setAddCGER(true) }}>+</AddButton>
                 {addCGER && (
                     <ContainerForm>
