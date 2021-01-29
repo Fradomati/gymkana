@@ -28,9 +28,17 @@ router.post("/createGame", async (req, res) => {
 router.post("/addNewChallengertoGame", async (req, res) => {
     const { challenger_id, game_id } = req.body
 
-    const addNewChallenger = await Game.findByIdAndUpdate({ id: game_id }, {
-        // SEGUIR AQUí
-    })
+    const addNewChallenger = await Game.findByIdAndUpdate(
+        { _id: game_id },
+        {
+            $push: { challengers: challenger_id }
+        })
+
+    if (addNewChallenger) {
+        res.json({ status: 200, addNewChallenger })
+    } else {
+        res.json({ status: 500, message: "Hubo un error al guardar la nueva prueba" })
+    }
 })
 
 router.get("/findAll", async (req, res) => {

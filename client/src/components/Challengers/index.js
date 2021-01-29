@@ -42,7 +42,7 @@ export const Challenger = (props) => {
     const [titleEdited, setTitleEdited] = useState();
     const [answerEdited, setAnswerEdited] = useState();
     // Error message
-    const [errorVoidInput, setErrorVoidInput] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(false)
 
     const counter = props.counter + 1;
 
@@ -211,26 +211,35 @@ export const Challenger = (props) => {
         };
 
         if (values.title === undefined) {
-            setErrorVoidInput("Falta rellenar el campo del Título")
+            setErrorMessage("Falta rellenar el campo del Título")
         } else if (values.description === undefined) {
-            setErrorVoidInput("Falta rellenar el campo de Descripción")
+            setErrorMessage("Falta rellenar el campo de Descripción")
         } else if (values.answer === undefined) {
-            setErrorVoidInput("Falta rellenar el campo del Respuesta")
+            setErrorMessage("Falta rellenar el campo del Respuesta")
         } else {
+
+            // If the challenger is new, add to the Game. Check if there are ID of Challenger
+
             // create new challenger
             addChallengerFN(values).then(res => {
-                console.log("RES", res)
-                addNewChallengertoGame({ challenger_id: res.newChallenger._id, game_id: res.newChallenger.game_id })
+                res.status == 500
+                    ?
+                    setErrorMessage(res.message)
+                    :
+                    addNewChallengertoGame({
+                        challenger_id: res.newChallenger._id,
+                        game_id: res.newChallenger.game_id
+                    }).then(gameUpdated => {
+                        console.log("Game Updated", gameUpdated)
+                        // Update state of parents with the new challenger
+                        props.setGameState(gameUpdated.addNewChallenger)
+                    })
             }
             )
-
-            // reset the error message
-            setErrorVoidInput(false)
-
-            // If the challenger is new, add to the Game
-
-
-
+            // reset error message
+            setErrorMessage(false)
+            // If all its ok, close de current form
+            if (!errorMessage) props.setChallengerState(false)
         }
 
         console.log(values);
@@ -704,7 +713,7 @@ export const Challenger = (props) => {
                             )}
                     </div>
                 )}
-            {errorVoidInput && (<ErrorMessageRed>⚠️{errorVoidInput} ⚠️</ErrorMessageRed>)}
+            {errorMessage && (<ErrorMessageRed>⚠️{errorMessage} ⚠️</ErrorMessageRed>)}
             <CenterFlexContainer>
                 <OrangeButton type="button" onClick={() => storeChallenger()}>
                     Guardar
