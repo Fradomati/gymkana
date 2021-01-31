@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form"
 import { TextRichDescription } from "../RichTextArea/index-quill"
 
 // Services
-import { addChallengerFN } from "../../services/Challenger_Services"
+import { addChallengerFN, findChallengerFN } from "../../services/Challenger_Services"
 import { addNewChallengertoGame } from "../../services/Generator_Service"
 
 // Styles Challengers 
@@ -49,6 +49,30 @@ export const Challenger = (props) => {
     const { register, handleSubmit } = useForm({
         mode: "onSubmit"
     });
+
+    /** First: Check if this challenger its new or its to modify one **/
+
+    useEffect(() => {
+        if (props.modifyChallenger) {
+            findChallengerFN(props.modifyChallenger).then(challengerFound => {
+                if (challengerFound.status == 200) {
+                    const challenger = challengerFound.challengerFound
+                    console.log(challenger)
+
+                    setInputURL(challenger.urls)
+                    setInputIMG(challenger.images)
+                    setInputEbb_IMG(challenger.images_Embed)
+                    setInputVideo(challenger.video_Embed)
+                    setInputClue(challenger.free_clues)
+                    setInputCluePre(challenger.premium_clues)
+                    setInputTitle(challenger.title)
+                    setInputDescription(challenger.description)
+                    setInputAnswer(challenger.correct_response)
+
+                }
+            })
+        }
+    }, [])
 
     /* Comun Functions */
     // Remove element of array
@@ -721,7 +745,8 @@ export const Challenger = (props) => {
                 <GreyButton
                     type="button"
                     onClick={() => {
-                        props.setAddState(false);
+                        props.setChallengerState(false);
+                        props.setChallengerSelectedState(false)
                     }}
                 >Cancelar</GreyButton>
             </CenterFlexContainer>
