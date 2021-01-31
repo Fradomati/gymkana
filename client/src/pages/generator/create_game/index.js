@@ -23,8 +23,11 @@ import { counter } from "../../../../lib/Functions/_functions"
 export const CreateGame = () => {
     const [game, setGame] = useState()
     const [errorGame, setErrorGame] = useState()
-    // Add challegner
+    // Add challenger
     const [addCGER, setAddCGER] = useState(false)
+
+    // Modify challenger state, if clic on someone I pass the ID of challenger to component Challengers
+    const [challengerSelected, setChallengerSelected] = useState()
 
     const { register, handleSubmit } = useForm({
         mode: "onSubmit"
@@ -115,7 +118,7 @@ export const CreateGame = () => {
                     {
                         game.challengers.map((e, i) => {
                             return (
-                                <LiChallengerListElement key={i}>{i + 1}</LiChallengerListElement>
+                                <LiChallengerListElement key={i} onClick={() => { setChallengerSelected(e), setAddCGER(true) }}>{i + 1}</LiChallengerListElement>
                             )
                         })
                     }
@@ -123,7 +126,13 @@ export const CreateGame = () => {
                 <AddButton type="button" onClick={() => { setAddCGER(true) }}>+</AddButton>
                 {addCGER && (
                     <ContainerForm>
-                        <Challenger counter={counter(game.challengers)} setChallengerState={setAddCGER} setGameState={setGame} id={game._id} />
+                        <Challenger
+                            counter={counter(game.challengers)}
+                            setChallengerState={setAddCGER}
+                            setGameState={setGame}
+                            id={game._id}
+                            modifyChallenger={challengerSelected}
+                            setChallengerSelectedState={setChallengerSelected} />
                     </ContainerForm>
                 )}
             </>
