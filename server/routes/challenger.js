@@ -32,6 +32,36 @@ router.post("/addChallenger", async (req, res) => {
     }
 })
 
+router.post("/modifyChallenger", async (req, res) => {
+
+    const { title, description, urls, images, imagesEbb_IMG, freeClue, premiumClue, answer } = req.body
+
+
+    if (checkBD == null) {
+        const newChallenger = await Challenger.findByIdAndUpdate({
+
+            title,
+            description,
+            urls,
+            images,
+            images_Embed: imagesEbb_IMG,
+            free_clues: freeClue,
+            premium_clues: premiumClue,
+            correct_response: answer
+        })
+        console.log(`Nuevo reto creado ${newChallenger.title}`)
+        res.json({ status: 200, newChallenger: newChallenger })
+    } else {
+        res.json({ status: 500, message: "Ya existe un reto con este nombre" })
+    }
+})
+
+
+// Modify a specific challenger
+
+
+
+
 // Get a specific challenger
 
 router.post("/getChallenger", async (req, res) => {

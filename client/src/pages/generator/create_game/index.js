@@ -123,7 +123,7 @@ export const CreateGame = () => {
                         })
                     }
                 </UlChallengerList>
-                <AddButton type="button" onClick={() => { setAddCGER(true) }}>+</AddButton>
+                <AddButton type="button" onClick={() => { setChallengerSelected(false), setAddCGER(true) }}>+</AddButton>
                 {addCGER && (
                     <ContainerForm>
                         <Challenger
