@@ -34,26 +34,26 @@ router.post("/addChallenger", async (req, res) => {
 
 router.post("/modifyChallenger", async (req, res) => {
 
-    const { title, description, urls, images, imagesEbb_IMG, freeClue, premiumClue, answer } = req.body
+    const { title, description, urls, images, imagesEbb, freeClue, premiumClue, answer, idChallenger } = req.body
 
 
-    if (checkBD == null) {
-        const newChallenger = await Challenger.findByIdAndUpdate({
+    const updatedChallenger = await Challenger.findByIdAndUpdate({ _id: idChallenger }, {
+        title: title,
+        description: description,
+        urls: urls,
+        images: images,
+        images_Embed: imagesEbb,
+        free_clues: freeClue,
+        premium_clues: premiumClue,
+        correct_response: answer
+    })
 
-            title,
-            description,
-            urls,
-            images,
-            images_Embed: imagesEbb_IMG,
-            free_clues: freeClue,
-            premium_clues: premiumClue,
-            correct_response: answer
-        })
-        console.log(`Nuevo reto creado ${newChallenger.title}`)
-        res.json({ status: 200, newChallenger: newChallenger })
-    } else {
-        res.json({ status: 500, message: "Ya existe un reto con este nombre" })
-    }
+    updatedChallenger
+        ?
+        res.json({ status: 200, newChallenger: updatedChallenger })
+        :
+        res.json({ status: 500, message: "Hay un error para actualizar este challenger" })
+
 })
 
 
