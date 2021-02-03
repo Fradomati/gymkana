@@ -11,9 +11,10 @@ import { TitlePage, TopText, ContainerForm, Input, Select, SelectContainer, UlCh
 import { LeftFlexContainer, CenterFlexContainer, SpaceOne } from "../../../globalStyles/containers"
 import { OrangeInput, AddButton } from "../../../globalStyles/buttons"
 
-// LFG 
+// Components
 import { LFG } from "../../../components/LFG/index"
 import { Challenger } from "../../../components/Challengers/index"
+import { CustomPositionChallenger } from "../../../components/CustomPositionChallengers/index"
 
 // Funtions 
 import { counter } from "../../../../lib/Functions/_functions"
@@ -57,6 +58,7 @@ export const CreateGame = () => {
     if (!game) {
         return (
             <>
+                <CustomPositionChallenger />
                 <LFG gameState={setGame} />
                 <TitlePage>Crear nueva Gymkana</TitlePage>
                 <ContainerForm>

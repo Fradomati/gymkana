@@ -18,13 +18,13 @@ export const addChallengerFN = async ({ game_id, title, description, urls, image
 
 }
 
-export const modifyChallengerFN = async ({ title, description, urls, images, imagesEbb_IMG, freeClue, premiumClue, answer, idChallenger }) => {
+export const modifyChallengerFN = async ({ title, description, urls, images, imagesEbb, freeClue, premiumClue, answer, idChallenger }) => {
     const response = await challengerService.post("/modifyChallenger", {
         title,
         description,
         urls,
         images,
-        imagesEbb_IMG,
+        imagesEbb,
         freeClue,
         premiumClue,
         answer,
