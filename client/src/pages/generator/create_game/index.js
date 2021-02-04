@@ -26,6 +26,9 @@ export const CreateGame = () => {
     const [errorGame, setErrorGame] = useState()
     // Add challenger
     const [addCGER, setAddCGER] = useState(false)
+    // Popup Custom Position Challenger (CPC)
+    const [openPopupCPC, setOpenPopupCPC] = useState(false)
+    const [customCPC, setCustomCPC] = useState()
 
     // Modify challenger state, if clic on someone I pass the ID of challenger to component Challengers
     const [challengerSelected, setChallengerSelected] = useState()
@@ -58,7 +61,6 @@ export const CreateGame = () => {
     if (!game) {
         return (
             <>
-                <CustomPositionChallenger />
                 <LFG gameState={setGame} />
                 <TitlePage>Crear nueva Gymkana</TitlePage>
                 <ContainerForm>
@@ -102,6 +104,7 @@ export const CreateGame = () => {
     } else {
         return (
             <>
+                {openPopupCPC && (<CustomPositionChallenger challengers={game.challengers} setOpenPopupCPC={setOpenPopupCPC} />)}
                 <LFG gameState={setGame} />
                 <TitlePage>{game.title}</TitlePage>
                 <div>Número de Pruebas: {counter(game.challengers)}</div>
@@ -125,6 +128,8 @@ export const CreateGame = () => {
                         })
                     }
                 </UlChallengerList>
+                <button type="button" onClick={() => { setOpenPopupCPC(true) }}>Clic me</button>
+
                 <AddButton type="button" onClick={() => { setChallengerSelected(false), setAddCGER(true) }}>+</AddButton>
                 {addCGER && (
                     <ContainerForm>
