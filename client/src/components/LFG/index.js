@@ -36,7 +36,6 @@ export const LFG = (props) => {
     }
 
 
-    console.log("Props del LFG => ", props)
     return (
         <>
             <RightFlexContainer>
