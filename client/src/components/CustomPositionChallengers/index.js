@@ -17,19 +17,19 @@ export const CustomPositionChallenger = (props) => {
         return title
     }
 
-    const functionToGetTitles = () => {
-        const titlesArr = []
-        idsCGER.forEach(async e => {
-            const title = await getTitle(e)
-            console.log(title)
-            titlesArr.push(title)
-        }).then(e => { return titlesArr })
-
+    const functionToGetTitles = async () => {
+        const titlesArr = idsCGER.map(e => {
+            return getTitle(e)
+        })
+        // I need to use "Promise.all" to get the data from ".map":
+        const results = Promise.all(titlesArr)
+        return await results
     }
 
     // Load the titles in array to show in popup
-    useEffect(() => {
-        functionToGetTitles().then(e => console.log(e))
+    useEffect(async () => {
+        const data = await functionToGetTitles()
+        setTitlesCGER(data)
     }, [idsCGER])
 
     // Change Position
@@ -68,7 +68,6 @@ export const CustomPositionChallenger = (props) => {
                         <>
                             {titlesCGER.map((e, i) => {
                                 return (<li key={i}>
-                                    {console.log("->", titlesCGER)}
                                     <div>
                                         {e}
                                         <div onClick={() => position(i, idsCGER, setIdsCGER, -1)}>+</div>
