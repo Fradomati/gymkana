@@ -35,12 +35,11 @@ export const modifyChallengerFN = async ({ title, description, urls, images, ima
 }
 
 export const findChallengerFN = async (challenger_id) => {
-
-
-    console.log("Id", challenger_id)
     const response = await challengerService.post("/getChallenger", {
         challenger_id
     })
 
     return response.data
 }
+
+
