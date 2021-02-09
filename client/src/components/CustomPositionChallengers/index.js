@@ -5,10 +5,12 @@ import { ParentContainer, ChildContainer } from "./style"
 
 // Services
 import { findChallengerFN } from "../../services/Challenger_Services"
+import { updatePositionsOfChallengersFN } from "../../services/Generator_Service"
 
 export const CustomPositionChallenger = (props) => {
     const [titlesCGER, setTitlesCGER] = useState()
     const [idsCGER, setIdsCGER] = useState(props.challengers)
+
 
     // Function to get Titles of challengers
     const getTitle = async (id) => {
@@ -78,7 +80,7 @@ export const CustomPositionChallenger = (props) => {
                         </>
                     )}
                 </ul>
-                <button type="button" onClick={() => { props.setOpenPopupCPC(false) }}>Cerrar</button>
+                <button type="button" onClick={() => { updatePositionsOfChallengersFN({ gameID: props.gameID, idsCGER }); props.setOpenPopupCPC(false) }}>Cerrar</button>
             </ChildContainer>
         </ParentContainer>
     )

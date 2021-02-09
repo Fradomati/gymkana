@@ -35,3 +35,13 @@ export const getAllGamesFN = async () => {
     return response.data
 }
 
+
+/* Update positions of Challengers into the Game */
+
+export const updatePositionsOfChallengersFN = async ({ gameID, idsCGER }) => {
+    const response = await generatorService.post("/updatePositionsOfChallengers", {
+        gameID, idsCGER
+    })
+    console.log("Updated:", response.data)
+    return response.data
+}

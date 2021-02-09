@@ -3,6 +3,8 @@ const router = express.Router();
 const _ = require("lodash")
 const Game = require("../models/Game_Model")
 
+/** To create a new Game **/
+
 router.post("/createGame", async (req, res) => {
 
     const { title, description, category, tags } = req.body
@@ -25,6 +27,8 @@ router.post("/createGame", async (req, res) => {
     }
 })
 
+/** Add new challenger **/
+
 router.post("/addNewChallengertoGame", async (req, res) => {
     const { challenger_id, game_id } = req.body
 
@@ -43,6 +47,8 @@ router.post("/addNewChallengertoGame", async (req, res) => {
     }
 })
 
+/** Pull all Challengers of a game **/
+
 router.get("/findAll", async (req, res) => {
 
     await Game.find({}, (err, result) => {
@@ -53,6 +59,23 @@ router.get("/findAll", async (req, res) => {
         }
     })
 
+})
+
+
+/** To update a Challengers Positions of a Game **/
+
+router.post("/updatePositionsOfChallengers", async (req, res) => {
+    const { gameID, idsCGER } = req.body
+    console.log("HI", gameID, idsCGER)
+
+    const update = await Game.findByIdAndUpdate({ _id: gameID }, {
+        challengers: idsCGER
+    })
+    if (update) {
+        res.json({ status: 200, update })
+    } else {
+        res.json({ status: 500, message: "No se pudo actualizar la posición de las pruebas" })
+    }
 })
 
 
