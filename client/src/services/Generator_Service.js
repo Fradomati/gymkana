@@ -43,5 +43,5 @@ export const updatePositionsOfChallengersFN = async ({ gameID, idsCGER }) => {
         gameID, idsCGER
     })
     console.log("Updated:", response.data)
-    return response.data
+    return response.data.update
 }

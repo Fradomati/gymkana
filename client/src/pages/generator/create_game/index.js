@@ -104,7 +104,11 @@ export const CreateGame = () => {
     } else {
         return (
             <>
-                {openPopupCPC && (<CustomPositionChallenger challengers={game.challengers} setOpenPopupCPC={setOpenPopupCPC} gameID={game._id} />)}
+                {openPopupCPC && (<CustomPositionChallenger
+                    challengers={game.challengers}
+                    setOpenPopupCPC={setOpenPopupCPC}
+                    gameID={game._id}
+                    setGame={setGame} />)}
                 <LFG gameState={setGame} />
                 <TitlePage>{game.title}</TitlePage>
                 <div>Número de Pruebas: {counter(game.challengers)}</div>

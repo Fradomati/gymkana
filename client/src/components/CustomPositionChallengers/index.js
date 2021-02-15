@@ -28,6 +28,11 @@ export const CustomPositionChallenger = (props) => {
         return await results
     }
 
+    const updateFunction = async () => {
+        const data = await updatePositionsOfChallengersFN({ gameID: props.gameID, idsCGER })
+        props.setGame(data)
+    }
+
     // Load the titles in array to show in popup
     useEffect(async () => {
         const data = await functionToGetTitles()
@@ -80,7 +85,7 @@ export const CustomPositionChallenger = (props) => {
                         </>
                     )}
                 </ul>
-                <button type="button" onClick={() => { updatePositionsOfChallengersFN({ gameID: props.gameID, idsCGER }); props.setOpenPopupCPC(false) }}>Cerrar</button>
+                <button type="button" onClick={() => { updateFunction(); props.setOpenPopupCPC(false) }}>Cerrar</button>
             </ChildContainer>
         </ParentContainer>
     )
