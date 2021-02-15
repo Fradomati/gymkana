@@ -66,7 +66,6 @@ router.get("/findAll", async (req, res) => {
 
 router.post("/updatePositionsOfChallengers", async (req, res) => {
     const { gameID, idsCGER } = req.body
-    console.log("HI", gameID, idsCGER)
 
     const update = await Game.findByIdAndUpdate({ _id: gameID }, {
         challengers: idsCGER
