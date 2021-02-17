@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 
 // Styles
-import { ParentContainer, ChildContainer } from "./style"
+import { ParentContainer, ChildContainer, ULContainer, ButtonClose, LiContainer, CustomPositionButtons, UpOption } from "./style"
+import { FlexBtwContainer } from "../../globalStyles/containers"
 
 // Services
 import { findChallengerFN } from "../../services/Challenger_Services"
@@ -70,22 +71,24 @@ export const CustomPositionChallenger = (props) => {
     return (
         <ParentContainer>
             <ChildContainer>
-                <ul>
+                <ButtonClose type="button" onClick={() => { updateFunction(); props.setOpenPopupCPC(false) }}>X</ButtonClose>
+                <ULContainer>
                     {titlesCGER && (
                         <>
                             {titlesCGER.map((e, i) => {
-                                return (<li key={i}>
-                                    <div>
-                                        {e}
-                                        <div onClick={() => position(i, idsCGER, setIdsCGER, -1)}>+</div>
-                                        <div onClick={() => position(i, idsCGER, setIdsCGER, +1)}>-</div>
-                                    </div>
-                                </li>)
+                                return (<LiContainer key={i}>
+                                    {i + 1} - {e}
+                                    <CustomPositionButtons>
+                                        <UpOption onClick={() => position(i, idsCGER, setIdsCGER, -1)}>+</UpOption>
+                                        <UpOption onClick={() => position(i, idsCGER, setIdsCGER, +1)}>-</UpOption>
+                                        <UpOption onClick={() => position(i, idsCGER, setIdsCGER, +1)}>x</UpOption>
+                                    </CustomPositionButtons>
+
+                                </LiContainer>)
                             })}
                         </>
                     )}
-                </ul>
-                <button type="button" onClick={() => { updateFunction(); props.setOpenPopupCPC(false) }}>Cerrar</button>
+                </ULContainer>
             </ChildContainer>
         </ParentContainer>
     )
