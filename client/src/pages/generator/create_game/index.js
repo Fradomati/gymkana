@@ -28,7 +28,6 @@ export const CreateGame = () => {
     const [addCGER, setAddCGER] = useState(false)
     // Popup Custom Position Challenger (CPC)
     const [openPopupCPC, setOpenPopupCPC] = useState(false)
-    const [customCPC, setCustomCPC] = useState()
 
     // Modify challenger state, if clic on someone I pass the ID of challenger to component Challengers
     const [challengerSelected, setChallengerSelected] = useState()

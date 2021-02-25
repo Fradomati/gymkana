@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react"
 
 // Styles
 import { ParentContainer, ChildContainer, ULContainer, ButtonClose, LiContainer, CustomPositionButtons, UpOption } from "./style"
-import { FlexBtwContainer } from "../../globalStyles/containers"
 
 // Services
-import { findChallengerFN } from "../../services/Challenger_Services"
+import { findChallengerFN, removeChallegenderFN } from "../../services/Challenger_Services"
 import { updatePositionsOfChallengersFN } from "../../services/Generator_Service"
+
+// Components 
 
 export const CustomPositionChallenger = (props) => {
     const [titlesCGER, setTitlesCGER] = useState()
     const [idsCGER, setIdsCGER] = useState(props.challengers)
+    const [confirmation, setConfirmation] = useState()
+    const [areYouSure, setAreYouSure] = useState()
 
 
     // Function to get Titles of challengers
@@ -29,9 +32,11 @@ export const CustomPositionChallenger = (props) => {
         return await results
     }
 
-    const updateFunction = async () => {
-        const data = await updatePositionsOfChallengersFN({ gameID: props.gameID, idsCGER })
-        props.setGame(data)
+    const updateFunction = () => {
+        updatePositionsOfChallengersFN({ gameID: props.gameID, idsCGER }).then(data => {
+            props.setGame(data)
+            props.setOpenPopupCPC(false)
+        })
     }
 
     // Load the titles in array to show in popup
@@ -68,10 +73,21 @@ export const CustomPositionChallenger = (props) => {
         }
     };
 
+    // Remove Challenger
+
+    const remove = async (id, i, setState) => {
+
+        const [...newArray] = idsCGER;
+        newArray.splice(i, 1)
+        const response = await removeChallegenderFN(id)
+        response.status == 200 ? setState(newArray) : console.log("Algo ha salido mal")
+        setAreYouSure(false)
+    }
+
     return (
         <ParentContainer>
             <ChildContainer>
-                <ButtonClose type="button" onClick={() => { updateFunction(); props.setOpenPopupCPC(false) }}>X</ButtonClose>
+                <ButtonClose type="button" onClick={() => { updateFunction() }}>X</ButtonClose>
                 <ULContainer>
                     {titlesCGER && (
                         <>
@@ -81,7 +97,11 @@ export const CustomPositionChallenger = (props) => {
                                     <CustomPositionButtons>
                                         <UpOption onClick={() => position(i, idsCGER, setIdsCGER, -1)}>+</UpOption>
                                         <UpOption onClick={() => position(i, idsCGER, setIdsCGER, +1)}>-</UpOption>
-                                        <UpOption onClick={() => position(i, idsCGER, setIdsCGER, +1)}>x</UpOption>
+                                        {
+                                            areYouSure
+                                                ? (<UpOption onClick={() => remove(idsCGER[i], i, setIdsCGER)}>x</UpOption>)
+                                                : (<UpOption onClick={() => setAreYouSure(true)}>?</UpOption>)
+                                        }
                                     </CustomPositionButtons>
 
                                 </LiContainer>)

@@ -42,4 +42,14 @@ export const findChallengerFN = async (challenger_id) => {
     return response.data
 }
 
+/* Remove de Challanger of BD */
+
+export const removeChallegenderFN = async (challenger_id) => {
+    const response = await challengerService.post("/removeChallenger", {
+        challenger_id
+    })
+
+    return response.data
+}
+
 

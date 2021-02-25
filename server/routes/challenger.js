@@ -57,16 +57,10 @@ router.post("/modifyChallenger", async (req, res) => {
 })
 
 
-// Modify a specific challenger
-
-
-
 
 // Get a specific challenger
 
 router.post("/getChallenger", async (req, res) => {
-
-    console.log(req.body)
 
     const { challenger_id } = req.body
 
@@ -77,17 +71,16 @@ router.post("/getChallenger", async (req, res) => {
         : res.json({ status: 500, message: "No se ha encontrado la prueba" })
 })
 
-// router.get("/findAll", async (req, res) => {
+router.post("/removeChallenger", async (req, res) => {
+    const { challenger_id } = req.body
 
-//     await Game.find({}, (err, result) => {
-//         if (err) {
-//             res.json({ status: 500, message: "No hay contenido" })
-//         } else {
-//             res.json(result)
-//         }
-//     })
+    const removedChallenger = await Challenger.findByIdAndRemove({ _id: challenger_id })
 
-// })
+    removedChallenger
+        ? res.json({ status: 200, challengerRemoved: removedChallenger })
+        : res.json({ status: 500, message: "No se ha encontrado la prueba" })
+
+})
 
 
 module.exports = router;
