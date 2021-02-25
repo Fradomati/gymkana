@@ -28,6 +28,7 @@ export const addNewChallengertoGame = async ({ challenger_id, game_id }) => {
 
 
 
+
 /*  Get all Games created */
 
 export const getAllGamesFN = async () => {
@@ -44,4 +45,15 @@ export const updatePositionsOfChallengersFN = async ({ gameID, idsCGER }) => {
     })
     console.log("Updated:", response.data)
     return response.data.update
+}
+
+
+/* Remove a Challenger ID of the Array of challengers */
+
+export const removeChallengerOfGame = async ({ challenger_id, game_id }) => {
+    const response = await generatorService.post("/removeChallengerOfArray", {
+        challenger_id,
+        game_id
+    })
+    return response.data
 }

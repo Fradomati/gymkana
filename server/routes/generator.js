@@ -67,15 +67,30 @@ router.get("/findAll", async (req, res) => {
 router.post("/updatePositionsOfChallengers", async (req, res) => {
     const { gameID, idsCGER } = req.body
 
-    const update = await Game.findByIdAndUpdate({ _id: gameID }, {
+    console.log("ACTUALIZACIÓN ----->", idsCGER)
+    await Game.findByIdAndUpdate({ _id: gameID }, {
         challengers: idsCGER
     })
+
+    const update = await Game.findById({ _id: gameID })
+
+    console.log("ACTUALIZACIÓN 2 ---->", update)
     if (update) {
         res.json({ status: 200, update })
     } else {
         res.json({ status: 500, message: "No se pudo actualizar la posición de las pruebas" })
     }
 })
+
+// /**  Remove Challenger of a Game  **/
+
+// router.post("/removeChallengerOfArray", async (req, res) => {
+//     const { challenger_id, game_id } = req.body
+
+//     const remove = await Game.findByIdAndUpdate({})
+
+//     const 
+// })
 
 
 module.exports = router;

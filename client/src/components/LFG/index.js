@@ -25,6 +25,7 @@ export const LFG = (props) => {
     const close = () => {
         setGamesFound(false)
     }
+
     const open = () => {
         if (openBox == false) {
             showGames()
