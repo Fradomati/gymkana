@@ -10,6 +10,16 @@ background-color: #18697a;
 text-align: center;
 `
 
+export const TitleSections = styled.div`
+font-size: 1.2em;
+text-align: center;
+color: white;
+padding: 0.2em 0;
+background-color: #18697a;
+border-radius: 5px;
+
+`
+
 export const ContainerForm = styled.div`
     margin-top: 1em;
         padding: 0.5em;
@@ -43,6 +53,7 @@ export const SelectContainer = styled.div`
 export const UlChallengerList = styled.ul`
 display: flex;
 justify-content: space-evenly;
+margin: 1em 0;
 `
 
 export const LiChallengerListElement = styled.li`
@@ -59,4 +70,7 @@ cursor: pointer;
     background-color: #ffa62b
 };
 
+`
+export const ThreePartsContainers = styled.div`
+width: 30%;
 `

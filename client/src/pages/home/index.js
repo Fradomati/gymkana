@@ -1,10 +1,33 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+
+// Services
+import { getAllGamesFN } from "../../services/Generator_Service"
 
 export const Home = () => {
-    return (
-        <div>
-            <div> Gymkana Game! </div>
+    const [gamesFound, setGamesFound] = useState()
 
-        </div>
-    )
+    useEffect(() => {
+        getAllGamesFN().then(arr => {
+            setGamesFound(arr)
+        })
+    }, [])
+
+
+
+    if (gamesFound) {
+        return (
+            <ul>
+                {gamesFound.map((e, i) => {
+                    return (
+                        <li key={i}>{e.title}</li>
+                    )
+                })}
+            </ul>
+        )
+    } else {
+        return (
+            <div>Cargando Gymkanas</div>
+        )
+    }
+
 }
