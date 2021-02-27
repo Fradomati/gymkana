@@ -5,11 +5,22 @@ import { useForm } from "react-hook-form"
 import { createGameFN } from "../../../services/Generator_Service"
 
 // Styles Create_Game
-import { TitlePage, TopText, ContainerForm, Input, Select, SelectContainer, UlChallengerList, LiChallengerListElement } from "./style"
+import {
+    TitlePage,
+    TitleSections,
+    TopText,
+    ContainerForm,
+    Input,
+    Select,
+    SelectContainer,
+    UlChallengerList,
+    LiChallengerListElement,
+    ThreePartsContainers
+} from "./style"
 
 // Styles Global
-import { LeftFlexContainer, CenterFlexContainer, SpaceOne } from "../../../globalStyles/containers"
-import { OrangeInput, AddButton } from "../../../globalStyles/buttons"
+import { LeftFlexContainer, CenterFlexContainer, SpaceOne, FlexBtwContainer, Margin2emTB } from "../../../globalStyles/containers"
+import { OrangeInput, AddButton, OrangeButton } from "../../../globalStyles/buttons"
 
 // Components
 import { LFG } from "../../../components/LFG/index"
@@ -110,18 +121,30 @@ export const CreateGame = () => {
                     setGame={setGame} />)}
                 <LFG gameState={setGame} />
                 <TitlePage>{game.title}</TitlePage>
-                <div>Número de Pruebas: {counter(game.challengers)}</div>
-                <div>Categorías: {game.category.map((e, i) => {
-                    return (
-                        <div key={i}>{e}</div>
-                    )
-                })} </div>
-                <div>Etiquetas: {game.tags.map((e, i) => {
-                    return (
-                        <div key={i}>{e}</div>
-                    )
-                })} </div>
-                <div>Pruebas</div>
+                <Margin2emTB>
+
+                    <FlexBtwContainer>
+                        <ThreePartsContainers>
+                            <TitleSections>CATEGORIAS</TitleSections>
+                            {game.category.map((e, i) => {
+                                return (
+                                    <div key={i}>{e}</div>
+                                )
+                            })} </ThreePartsContainers>
+                        <ThreePartsContainers>
+                            <TitleSections>ETIQUETAS</TitleSections>
+                            {game.tags.map((e, i) => {
+                                return (
+                                    <div key={i}>{e}</div>
+                                )
+                            })} </ThreePartsContainers>
+                        <ThreePartsContainers>
+                            <TitleSections>OTROS</TitleSections>
+                            <div>Lorem</div>
+                        </ThreePartsContainers>
+                    </FlexBtwContainer>
+                </Margin2emTB>
+                <TitleSections>Pruebas</TitleSections>
                 <UlChallengerList>
                     {
                         game.challengers.map((e, i) => {
@@ -131,9 +154,9 @@ export const CreateGame = () => {
                         })
                     }
                 </UlChallengerList>
-                <button type="button" onClick={() => { setOpenPopupCPC(true) }}>Clic me</button>
+                <OrangeButton type="button" onClick={() => { setOpenPopupCPC(true) }}>Ordenar Pruebas</OrangeButton>
 
-                <AddButton type="button" onClick={() => { setChallengerSelected(false), setAddCGER(true) }}>+</AddButton>
+                <OrangeButton type="button" onClick={() => { setChallengerSelected(false), setAddCGER(true) }}>Añadir Prueba</OrangeButton>
                 {addCGER && (
                     <ContainerForm>
                         <Challenger

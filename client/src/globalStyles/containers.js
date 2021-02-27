@@ -28,3 +28,11 @@ align-items: center;
 export const SpaceOne = styled.div`
 margin: 1em 0
 `
+
+
+
+// MARGIN CONTAINERS 
+
+export const Margin2emTB = styled.div`
+margin: 2em 0
+`
