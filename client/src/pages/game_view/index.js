@@ -13,7 +13,7 @@ export const GameView = (props) => {
 
     useEffect(() => {
         getGameFN({ share_url }).then(result => {
-            //  setGame(result.game)
+            setGame(result.game)
         })
     }, [])
 

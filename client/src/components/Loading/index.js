@@ -1,7 +1,7 @@
 import React from "react";
 
 // Images
-import { ripple } from "../../../public/images/ripple-loading.gif"
+import ripple from "../../../public/images/loading.svg"
 // Styles
 import { ImgLoading } from "./style"
 
