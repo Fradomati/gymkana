@@ -35,7 +35,7 @@ export const getAllGamesFN = async () => {
 /* Get a Game created */
 
 export const getGameFN = async ({ share_url }) => {
-    const response = await generatorService.get("/getGame", { share_url })
+    const response = await generatorService.get(`/getGame/${share_url}`)
     return response.data
 }
 

@@ -64,11 +64,10 @@ router.get("/findAll", async (req, res) => {
 
 /** Get a Game by Share_url **/
 
-router.get("/getGame", async (req, res) => {
-    const { share_url } = req.body
-    console.log("-->", req.params)
+router.get("/getGame/:share_url", async (req, res) => {
+    const { share_url } = req.params
     const game = await Game.findOne({
-        share_url: share_url
+        share_url
     })
     if (game == null) {
         res.json({ status: 500, message: "No existe este juego" })
