@@ -51,6 +51,7 @@ export const CreateGame = () => {
         const response = await createGameFN({
             title: data.title,
             description: data.description,
+            share_url: data.url,
             category: [data.category],
             tags: [data.tags]
         })
@@ -82,6 +83,10 @@ export const CreateGame = () => {
                         })} />
                         <TopText>Descripción</TopText>
                         <Input type="text" name="description" ref={register({
+                            required: false
+                        })} />
+                        <TopText>URL</TopText>
+                        <Input type="text" name="url" ref={register({
                             required: false
                         })} />
                         <LeftFlexContainer>

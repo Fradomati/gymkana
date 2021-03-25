@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 // Services
 import { getAllGamesFN } from "../../services/Generator_Service"
@@ -19,7 +20,7 @@ export const Home = () => {
             <ul>
                 {gamesFound.map((e, i) => {
                     return (
-                        <li key={i}>{e.title}</li>
+                        <li key={i} ><Link to={`/game/${e.share_url}`}>{e.title}</Link></li>
                     )
                 })}
             </ul>

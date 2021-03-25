@@ -1,20 +1,19 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-// INTERFACE
+/* INTERFACE */
 import { Layout } from "./interface/layout/index"
-
-// PAGES
+/* PAGES */
 // Home
 import { Home } from "./pages/home/index"
 // Auth
 import { Login } from "./pages/auth/Login/index"
 import { Signup } from "./pages/auth/Signup/index"
 import { Profile } from "./pages/auth/Profile/index"
-
 //Generator
 import { CreateGame } from "./pages/generator/create_game/index"
-
+//Game View
+import { GameView } from "./pages/game_view/index"
 // LIB
 import { withAuthentication } from "../lib/Authentication/withAuthentication"
 
@@ -32,6 +31,7 @@ export const App = withAuthentication(
                         <Route path="/signup" exact component={Signup} />
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/createGame" exact component={CreateGame} />
+                        <Route path="/game/:share_url" exact component={GameView} />
                     </Switch>
                 </Layout>
             </Router>
