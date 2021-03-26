@@ -7,7 +7,7 @@ const Game = require("../models/Game_Model")
 
 router.post("/createGame", async (req, res) => {
 
-    const { title, description, category, tags } = req.body
+    const { title, description, share_url, category, tags } = req.body
 
     const checkBD = await Game.findOne({
         title: title
@@ -18,6 +18,7 @@ router.post("/createGame", async (req, res) => {
             title,
             description,
             category,
+            share_url,
             tags
         })
         console.log(`Nuevo juego creado ${newGame.title}`)
@@ -59,6 +60,20 @@ router.get("/findAll", async (req, res) => {
         }
     })
 
+})
+
+/** Get a Game by Share_url **/
+
+router.get("/getGame/:share_url", async (req, res) => {
+    const { share_url } = req.params
+    const game = await Game.findOne({
+        share_url
+    })
+    if (game == null) {
+        res.json({ status: 500, message: "No existe este juego" })
+    } else {
+        res.json({ status: 200, game })
+    }
 })
 
 

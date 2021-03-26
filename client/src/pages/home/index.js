@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 // Services
 import { getAllGamesFN } from "../../services/Generator_Service"
+
+// Components
+import { Loading } from "../../components/Loading"
 
 export const Home = () => {
     const [gamesFound, setGamesFound] = useState()
@@ -12,21 +16,19 @@ export const Home = () => {
         })
     }, [])
 
-
-
     if (gamesFound) {
         return (
             <ul>
                 {gamesFound.map((e, i) => {
                     return (
-                        <li key={i}>{e.title}</li>
+                        <li key={i} ><Link to={`/game/${e.share_url}`}>{e.title}</Link></li>
                     )
                 })}
             </ul>
         )
     } else {
         return (
-            <div>Cargando Gymkanas</div>
+            <Loading />
         )
     }
 

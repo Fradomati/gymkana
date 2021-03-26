@@ -89,12 +89,16 @@ app.use("/auth", auth);
 const generator = require("./routes/generator");
 app.use("/generator", generator)
 
-// Generator Route
+// Challenger Route
 const challenger = require("./routes/challenger");
 app.use("/challenger", challenger)
 
 // Upload Route
 const upload = require("./routes/uploads");
 app.use("/uploads", upload)
+
+// Boards Route
+const board = require("./routes/board")
+app.use("/board", board)
 
 module.exports = app;

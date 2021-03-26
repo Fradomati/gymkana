@@ -1,5 +1,8 @@
 import React, { useState, useEffect, createContext } from "react";
+// Services
 import { whoameFN } from "../../src/services/Auth_Service"
+// Components
+import { Loading } from "../../src/components/Loading/index"
 
 export const UserSessionContext = createContext();
 
@@ -22,8 +25,10 @@ export const withAuthentication = (Component) => () => {
 
     return (
         <UserSessionContext.Provider value={[userLoaded, setUserLoaded]}>
-            {loading && (<p>Cargando...</p>)}
-            {!loading && (<Component />)}
+            {loading
+                ? (<Loading />)
+                : <Component />
+            }
         </UserSessionContext.Provider>
     );
 };
