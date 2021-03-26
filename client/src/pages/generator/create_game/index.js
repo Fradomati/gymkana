@@ -64,11 +64,9 @@ export const CreateGame = () => {
     }
 
     useEffect(() => {
-        console.log("ASDASDAKMFAF", game)
         setAddCGER(false)
     }, [game])
 
-    console.log(game)
     if (!game) {
         return (
             <>
@@ -127,7 +125,6 @@ export const CreateGame = () => {
                 <LFG gameState={setGame} />
                 <TitlePage>{game.title}</TitlePage>
                 <Margin2emTB>
-
                     <FlexBtwContainer>
                         <ThreePartsContainers>
                             <TitleSections>CATEGORIAS</TitleSections>

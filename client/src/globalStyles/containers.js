@@ -13,8 +13,16 @@ export const LeftFlexContainer = styled.div`
 `
 
 export const CenterFlexContainer = styled.div`
-display: flex;
-justify-content: center;
+    display: flex;
+    justify-content: center;
+`
+
+export const CenterMiddleCointaner = styled.div`
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 export const FlexBtwContainer = styled.div`

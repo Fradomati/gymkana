@@ -4,12 +4,15 @@ import React from "react";
 import ripple from "../../../public/images/loading.svg"
 // Styles
 import { ImgLoading } from "./style"
+import { CenterMiddleCointaner } from "../../globalStyles/containers"
 
 export const Loading = () => {
 
     return (
         <>
-            <ImgLoading src={ripple} />
+            <CenterMiddleCointaner>
+                <ImgLoading src={ripple} />
+            </CenterMiddleCointaner>
         </>
     )
 }

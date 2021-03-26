@@ -4,6 +4,9 @@ import { Link } from "react-router-dom"
 // Services
 import { getAllGamesFN } from "../../services/Generator_Service"
 
+// Components
+import { Loading } from "../../components/Loading"
+
 export const Home = () => {
     const [gamesFound, setGamesFound] = useState()
 
@@ -12,8 +15,6 @@ export const Home = () => {
             setGamesFound(arr)
         })
     }, [])
-
-
 
     if (gamesFound) {
         return (
@@ -27,7 +28,7 @@ export const Home = () => {
         )
     } else {
         return (
-            <div>Cargando Gymkanas</div>
+            <Loading />
         )
     }
 
