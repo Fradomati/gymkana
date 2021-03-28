@@ -5,7 +5,24 @@ export const createBoard = async ({ game_id, challengers, /* ID USER */ }) => {
         game_id,
         challengers
     })
-    console.log("Response", response)
+
+    return response.data
+}
+
+export const getBoard = async (id) => {
+    const response = await boardService.post("/getBoard", {
+        id
+    })
+
+    return response.data
+}
+
+export const updateBoard = async ({ id, challengersToDo, challengersDone }) => {
+    const response = await boardService.post("/updateBoard", {
+        id,
+        challengersToDo,
+        challengersDone
+    })
 
     return response.data
 }

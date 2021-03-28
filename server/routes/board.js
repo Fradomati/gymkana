@@ -19,4 +19,26 @@ router.post("/createBoard", async (req, res) => {
     newBoard ? res.json({ status: 200, newBoard }) : res.json({ status: 500, message: "No se ha podido crear el tablero" })
 })
 
+/** Get a Board **/
+
+router.post("/getBoard", async (req, res) => {
+    const { id } = req.body
+    const boardFound = await Board.findById({ _id: id })
+    boardFound ? res.json({ status: 200, boardFound }) : res.json({ status: 500, message: "No se ha encontrado el tablero" })
+})
+
+/** Update a Board **/
+router.post("/updateBoard", async (req, res) => {
+    const { id, challengersToDo, challengersDone } = req.body
+    const boardUpdated = await Board.findByIdAndUpdate({
+        _id: id
+    },
+        {
+            challengersToDo: challengersToDo,
+            challengersDone: challengersDone
+        })
+    boardUpdated ? res.json({ status: 200, boardUpdated }) : res.json({ status: 500, message: "No se ha podido actualizar el tablero" })
+})
+
+
 module.exports = router

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom"
 
 // Service
 import { getGameFN } from "../../services/Generator_Service"
@@ -11,8 +12,8 @@ import { OrangeButton, OrangeInput } from "../../globalStyles/buttons"
 import { GreyContainer, TitleDiv, DescriptionDiv } from "./style"
 
 
-export const GameView = (props) => {
-    const share_url = props.match.params.share_url
+export const GameView = withRouter(({ match, history }) => {
+    const share_url = match.params.share_url
     const [game, setGame] = useState()
 
     useEffect(() => {
@@ -24,6 +25,10 @@ export const GameView = (props) => {
     const crearTablero = (game_id, challengers) => {
         createBoard({ game_id, challengers }).then(result => {
             console.log(result)
+            if (result.status == 200) {
+                history.push(`/board/${game.title}`)
+                localStorage.setItem("currentBoard", result.newBoard._id)
+            }
             // Meter aquí el History que lleve a la página del tablero actual, si el status = 200
         }
         )
@@ -54,4 +59,4 @@ export const GameView = (props) => {
                 )}
         </>
     )
-}
+})
