@@ -14,6 +14,8 @@ import { Profile } from "./pages/auth/Profile/index"
 import { CreateGame } from "./pages/generator/create_game/index"
 //Game View
 import { GameView } from "./pages/game_view/index"
+//Boar View
+import { BoardView } from "./pages/board_view//index"
 // LIB
 import { withAuthentication } from "../lib/Authentication/withAuthentication"
 
@@ -32,6 +34,7 @@ export const App = withAuthentication(
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/createGame" exact component={CreateGame} />
                         <Route path="/game/:share_url" exact component={GameView} />
+                        <Route path="/board/:title" exact component={BoardView} />
                     </Switch>
                 </Layout>
             </Router>
