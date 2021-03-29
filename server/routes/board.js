@@ -30,13 +30,15 @@ router.post("/getBoard", async (req, res) => {
 /** Update a Board **/
 router.post("/updateBoard", async (req, res) => {
     const { id, challengersToDo, challengersDone } = req.body
-    const boardUpdated = await Board.findByIdAndUpdate({
+    await Board.findByIdAndUpdate({
         _id: id
     },
         {
             challengersToDo: challengersToDo,
             challengersDone: challengersDone
         })
+
+    const boardUpdated = await Board.findById({ _id: id })
     boardUpdated ? res.json({ status: 200, boardUpdated }) : res.json({ status: 500, message: "No se ha podido actualizar el tablero" })
 })
 
