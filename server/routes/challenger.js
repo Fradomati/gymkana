@@ -7,7 +7,7 @@ const Challenger = require("../models/Challegner_Model")
 // Add new challenger to game or modify
 router.post("/addChallenger", async (req, res) => {
 
-    const { game_id, title, description, urls, images, imagesEbb_IMG, freeClue, premiumClue, answer } = req.body
+    const { game_id, title, description, urls, images, imagesEbb, videosEbb, freeClue, premiumClue, answer } = req.body
 
     const checkBD = await Challenger.findOne({
         title: title
@@ -20,7 +20,8 @@ router.post("/addChallenger", async (req, res) => {
             description,
             urls,
             images,
-            images_Embed: imagesEbb_IMG,
+            images_Embed: imagesEbb,
+            video_Embed: videosEbb,
             free_clues: freeClue,
             premium_clues: premiumClue,
             correct_response: answer
@@ -34,7 +35,7 @@ router.post("/addChallenger", async (req, res) => {
 
 router.post("/modifyChallenger", async (req, res) => {
 
-    const { title, description, urls, images, imagesEbb, freeClue, premiumClue, answer, idChallenger } = req.body
+    const { title, description, urls, images, imagesEbb, videosEbb, freeClue, premiumClue, answer, idChallenger } = req.body
 
 
     const updatedChallenger = await Challenger.findByIdAndUpdate({ _id: idChallenger }, {
@@ -43,6 +44,7 @@ router.post("/modifyChallenger", async (req, res) => {
         urls: urls,
         images: images,
         images_Embed: imagesEbb,
+        video_Embed: videosEbb,
         free_clues: freeClue,
         premium_clues: premiumClue,
         correct_response: answer

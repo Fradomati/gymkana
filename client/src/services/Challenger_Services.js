@@ -1,6 +1,6 @@
 import { challengerService } from "./Connections";
 
-export const addChallengerFN = async ({ game_id, title, description, urls, images, imagesEbb_IMG, freeClue, premiumClue, answer }) => {
+export const addChallengerFN = async ({ game_id, title, description, urls, images, imagesEbb, videosEbb, freeClue, premiumClue, answer }) => {
 
     const response = await challengerService.post("/addChallenger", {
         game_id,
@@ -8,7 +8,8 @@ export const addChallengerFN = async ({ game_id, title, description, urls, image
         description,
         urls,
         images,
-        imagesEbb_IMG,
+        imagesEbb,
+        videosEbb,
         freeClue,
         premiumClue,
         answer
@@ -18,13 +19,14 @@ export const addChallengerFN = async ({ game_id, title, description, urls, image
 
 }
 
-export const modifyChallengerFN = async ({ title, description, urls, images, imagesEbb, freeClue, premiumClue, answer, idChallenger }) => {
+export const modifyChallengerFN = async ({ title, description, urls, images, imagesEbb, videosEbb, freeClue, premiumClue, answer, idChallenger }) => {
     const response = await challengerService.post("/modifyChallenger", {
         title,
         description,
         urls,
         images,
         imagesEbb,
+        videosEbb,
         freeClue,
         premiumClue,
         answer,

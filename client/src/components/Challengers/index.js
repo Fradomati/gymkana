@@ -230,6 +230,7 @@ export const Challenger = (props) => {
             urls: inputURL,
             images: inputIMG,
             imagesEbb: inputEbb_IMG,
+            videosEbb: inputVideo,
             freeClue: inputClue,
             premiumClue: inputCluePre,
             answer: inputAnswer

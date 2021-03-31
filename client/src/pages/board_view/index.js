@@ -8,9 +8,12 @@ import { Loading } from "../../components/Loading/index"
 // Styles
 import {
     UlProgressBar, LiProgressCirclesDone, LiProgressCirclesCurrent, LiProgressCirclesToDo, Title, DivChallenger,
-    CurrentNumber, DivSection, PreDivSection
+    CurrentNumber, DivSection, PreDivSection, DivSectionImg, ImgEmbed, DivSectionVideo, VideoIcon, DivStructureVideo,
+
 } from "./style"
 import { Div70width } from "../../globalStyles/containers"
+// Images
+import play from "../../../public/images/play.svg"
 
 export const BoardView = (props) => {
     const [board, setBoard] = useState()
@@ -105,7 +108,36 @@ export const BoardView = (props) => {
                             <Title>{challenger.title}</Title>
                             <PreDivSection>Descripción:</PreDivSection>
                             <DivSection dangerouslySetInnerHTML={{ __html: challenger.description }} style={{ width: "100%" }}></DivSection>
-                            <DivSection>{}</DivSection>
+                            {challenger.images_Embed.length > 0 && (
+                                <>
+                                    <PreDivSection>Imágenes:</PreDivSection>
+                                    <DivSectionImg>
+                                        {challenger.images_Embed.map((img, i) => {
+                                            return <ImgEmbed key={i} src={img} />
+                                        })}
+                                    </DivSectionImg>
+                                </>
+                            )}
+
+                            {challenger.video_Embed.length > 0 && (
+                                <>
+                                    <PreDivSection>Vídeos:</PreDivSection>
+                                    <DivSectionVideo>
+                                        {challenger.video_Embed.map((video, i) => {
+                                            return (
+                                                <DivStructureVideo key={i}>
+                                                    <VideoIcon src={play} />
+                                                    <div>Vídeo {i + 1}</div>
+                                                </DivStructureVideo>
+                                            )
+                                        })}
+                                    </DivSectionVideo>
+
+                                </>
+                            )
+
+                            }
+                            <DivSection></DivSection>
                             <DivSection></DivSection>
                             <DivSection></DivSection>
                             <DivSection></DivSection>
