@@ -69,3 +69,32 @@ box-shadow: 0px 0px 3px 0px #888888ad;
 border-radius: 5px; 
 margin-bottom: 1em;
 `
+export const DivSectionImg = styled.div`
+display: flex;
+flex-wrap: wrap;
+width: 100%;
+
+`
+export const ImgEmbed = styled.img`
+min-width: 40%;
+max-width: 50%;
+height: auto;
+`
+export const DivSectionVideo = styled.div`
+display: flex;
+width: 100%;
+`
+
+export const DivStructureVideo = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+font-size: 0.9em;
+margin: 0.5em 0
+`
+
+export const VideoIcon = styled.img`
+width: 2em;
+height: auto;
+margin-bottom: 0.3em;
+`
