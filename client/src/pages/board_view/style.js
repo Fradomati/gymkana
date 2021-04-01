@@ -73,7 +73,7 @@ export const DivSectionImg = styled.div`
 display: flex;
 flex-wrap: wrap;
 width: 100%;
-
+margin-bottom: 1em;
 `
 export const ImgEmbed = styled.img`
 min-width: 40%;
@@ -83,18 +83,40 @@ height: auto;
 export const DivSectionVideo = styled.div`
 display: flex;
 width: 100%;
+margin-bottom: 1em;
 `
-
 export const DivStructureVideo = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
 font-size: 0.9em;
-margin: 0.5em 0
+margin: 1em;
+color: #30899b;
+cursor: default;
+width: 4em;
+height: 4em;
 `
-
 export const VideoIcon = styled.img`
-width: 2em;
+width: 2.5em;
 height: auto;
 margin-bottom: 0.3em;
+cursor: pointer;
+&:hover {
+    width: 2.7em
+}
+`
+export const DivSectionInfo = styled.div`
+width: 100%;
+display: flex;
+justify-content: flex-end;
+`
+
+export const DivInfo = styled.div`
+width: 1em;
+height: 1em;
+border-radius: 100%;
+text-align: center;
+background-color: #f5a332;
+padding: 0.3em;
+box-shadow: 0px 0px 3px #000000c2;
 `

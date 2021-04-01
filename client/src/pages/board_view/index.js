@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form"
+import { usePopperTooltip } from 'react-popper-tooltip';
+import 'react-popper-tooltip/dist/styles.css';
 // Service
 import { getBoard, updateBoard } from "../../services/Board_Service"
 import { findChallengerFN } from "../../services/Challenger_Services"
@@ -9,7 +11,7 @@ import { Loading } from "../../components/Loading/index"
 import {
     UlProgressBar, LiProgressCirclesDone, LiProgressCirclesCurrent, LiProgressCirclesToDo, Title, DivChallenger,
     CurrentNumber, DivSection, PreDivSection, DivSectionImg, ImgEmbed, DivSectionVideo, VideoIcon, DivStructureVideo,
-
+    DivSectionInfo, DivInfo
 } from "./style"
 import { Div70width } from "../../globalStyles/containers"
 // Images
@@ -30,7 +32,6 @@ export const BoardView = (props) => {
         let id = localStorage.getItem("currentBoard")
         setIdBoard(id)
     }, [])
-
     // Busco el tablero y lo paso al estado
     useEffect(() => {
         if (idBoard) {
@@ -40,19 +41,17 @@ export const BoardView = (props) => {
             })
         }
     }, [idBoard])
-
-
-
+    // Actualización del Challenger Mostrado
     const currentChallenger = async (id) => {
         const response = await findChallengerFN(id)
         setChallenger(response.challengerFound)
         console.log("Challenger actual =>", response)
     }
-
+    // Comprobación de si se muestra o no la respuesta según si ha pasado el challenger o no.
     const showAnswerCheck = (id) => {
         return board.challengersDone.includes(id)
     }
-
+    // Comprobación de la respuesta correcta
     const checkAnswer = (data) => {
         const answer = data.answer
         const correctAnswer = challenger.correct_response
@@ -75,6 +74,14 @@ export const BoardView = (props) => {
         }
     }
 
+    // Burbujas informativas
+    const {
+        getArrowProps,
+        getTooltipProps,
+        setTooltipRef,
+        setTriggerRef,
+        visible,
+    } = usePopperTooltip();
 
     return (
         <>
@@ -106,7 +113,19 @@ export const BoardView = (props) => {
                         }
                         <DivChallenger>
                             <Title>{challenger.title}</Title>
-                            <PreDivSection>Descripción:</PreDivSection>
+                            <DivSectionInfo>
+                                <DivInfo ref={setTriggerRef}>i</DivInfo>
+                                {visible && (
+                                    <div
+                                        ref={setTooltipRef}
+                                        {...getTooltipProps({ className: 'tooltip-container' })}
+                                    >
+                                        <div {...getArrowProps({ className: 'tooltip-arrow' })} />
+                                        Tooltip
+                                    </div>
+                                )}
+                            </DivSectionInfo>
+                            <PreDivSection >Descripción:</PreDivSection>
                             <DivSection dangerouslySetInnerHTML={{ __html: challenger.description }} style={{ width: "100%" }}></DivSection>
                             {challenger.images_Embed.length > 0 && (
                                 <>
@@ -126,7 +145,7 @@ export const BoardView = (props) => {
                                         {challenger.video_Embed.map((video, i) => {
                                             return (
                                                 <DivStructureVideo key={i}>
-                                                    <VideoIcon src={play} />
+                                                    <a href={video} target="_blank"><VideoIcon src={play} /></a>
                                                     <div>Vídeo {i + 1}</div>
                                                 </DivStructureVideo>
                                             )
@@ -135,12 +154,7 @@ export const BoardView = (props) => {
 
                                 </>
                             )
-
                             }
-                            <DivSection></DivSection>
-                            <DivSection></DivSection>
-                            <DivSection></DivSection>
-                            <DivSection></DivSection>
                             {
                                 showAnswerCheck(challenger._id) == true ?
                                     (
