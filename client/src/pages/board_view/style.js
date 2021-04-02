@@ -76,14 +76,18 @@ width: 100%;
 margin-bottom: 1em;
 `
 export const ImgEmbed = styled.img`
-min-width: 40%;
-max-width: 50%;
+min-width: 20%;
+max-width: 30%;
 height: auto;
 `
 export const DivSectionVideo = styled.div`
 display: flex;
 width: 100%;
 margin-bottom: 1em;
+padding: 0.5em 0.3em;
+background-color: #f9f9f9;
+box-shadow: 0px 0px 3px 0px #888888ad;
+border-radius: 5px;
 `
 export const DivStructureVideo = styled.div`
 display: flex;
