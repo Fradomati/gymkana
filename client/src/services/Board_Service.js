@@ -26,3 +26,11 @@ export const updateBoard = async ({ id, challengersToDo, challengersDone }) => {
 
     return response.data
 }
+
+export const updateCluesFreeBoard = async ({ id, cluesUsed }) => {
+    const response = await boardService.post("/freeCluesUsed", {
+        id,
+        cluesUsed
+    })
+    return response.data
+}

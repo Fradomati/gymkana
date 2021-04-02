@@ -11,6 +11,8 @@ const BoardsModel = new Schema(
         user: { type: Schema.Types.ObjectId, ref: "User" },
         challengersToDo: [{ type: Schema.Types.ObjectId, ref: "Challenger" }],
         challengersDone: [{ type: Schema.Types.ObjectId, ref: "Challenger" }],
+        cluesUsed: { type: Array, default: [] },
+        cluesNoUsed: { type: Array, default: [] },
     },
     {
         timestamps: true,

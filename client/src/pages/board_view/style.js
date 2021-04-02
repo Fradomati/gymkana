@@ -105,6 +105,8 @@ cursor: pointer;
     width: 2.7em
 }
 `
+
+
 export const DivSectionInfo = styled.div`
 width: 100%;
 display: flex;
@@ -118,5 +120,35 @@ border-radius: 100%;
 text-align: center;
 background-color: #f5a332;
 padding: 0.3em;
-box-shadow: 0px 0px 3px #000000c2;
+box-shadow: 0px 0px 2px #000000c2;
+cursor: pointer;
+`
+export const ClueHide = styled.li`
+width: 5em;
+padding: 0.3em;
+margin: 0.5em 0;
+border-radius: 5px;
+background-color: #ffa62b;
+box-shadow: 0px 0px 2px #000000c2;
+cursor: pointer;
+&:hover {
+    box-shadow: 0px 0px 4px #000000c2;
+   
+}
+`
+export const ClueShow = styled.li`
+padding: 0.3em 0.3em;
+background-color: #f9f9f9;
+box-shadow: 0px 0px 3px 0px #888888ad;
+border-radius: 5px;
+margin-bottom: 0.5em;
+`
+export const FormAnswer = styled.form`
+display: flex;
+flex-direction: column;
+margin-top: 2em;
+`
+
+export const MainContent = styled.div`
+padding-bottom: 10em;
 `

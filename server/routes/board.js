@@ -42,5 +42,18 @@ router.post("/updateBoard", async (req, res) => {
     boardUpdated ? res.json({ status: 200, boardUpdated }) : res.json({ status: 500, message: "No se ha podido actualizar el tablero" })
 })
 
+/** Clues Free Used Update **/
+router.post("/freeCluesUsed", async (req, res) => {
+    const { id, cluesUsed } = req.body
+    await Board.findByIdAndUpdate({
+        _id: id
+    }, {
+        cluesUsed: cluesUsed
+    })
+    const boardUpdated = await Board.findById({ _id: id })
+    boardUpdated ? res.json({ status: 200, boardUpdated }) : res.json({ status: 500, message: "No se ha podido actualizar el tablero" })
+
+})
+
 
 module.exports = router

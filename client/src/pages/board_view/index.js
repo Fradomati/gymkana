@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { usePopperTooltip } from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
 // Service
-import { getBoard, updateBoard } from "../../services/Board_Service"
+import { getBoard, updateBoard, updateCluesFreeBoard } from "../../services/Board_Service"
 import { findChallengerFN } from "../../services/Challenger_Services"
 // Loading
 import { Loading } from "../../components/Loading/index"
@@ -11,11 +11,12 @@ import { Loading } from "../../components/Loading/index"
 import {
     UlProgressBar, LiProgressCirclesDone, LiProgressCirclesCurrent, LiProgressCirclesToDo, Title, DivChallenger,
     CurrentNumber, DivSection, PreDivSection, DivSectionImg, ImgEmbed, DivSectionVideo, VideoIcon, DivStructureVideo,
-    DivSectionInfo, DivInfo
+    DivSectionInfo, DivInfo, MainContent, ClueHide, ClueShow, FormAnswer
 } from "./style"
 import { Div70width } from "../../globalStyles/containers"
 // Images
 import play from "../../../public/images/play.svg"
+import enlace from "../../../public/images/enlace.svg"
 
 export const BoardView = (props) => {
     const [board, setBoard] = useState()
@@ -73,6 +74,17 @@ export const BoardView = (props) => {
             console.log("Respuesta Incorrecta...")
         }
     }
+    // Comprobación de Pistas Utilizadas
+    const showClue = (clue) => {
+        return board.cluesUsed.includes(clue)
+    }
+    // Funcion Usar Pista
+    const useFreeClue = (i) => {
+        board.cluesUsed.push(challenger.free_clues[i])
+        const cluesUsed = board.cluesUsed
+        const id = localStorage.getItem("currentBoard")
+        updateCluesFreeBoard({ id, cluesUsed }).then(board => setBoard(board.boardUpdated))
+    }
 
     // Burbujas informativas
     const {
@@ -87,7 +99,7 @@ export const BoardView = (props) => {
         <>
             {challenger
                 ? (
-                    <div>
+                    <MainContent>
                         {board.challengersToDo.length != 0 ? (
                             <UlProgressBar>
                                 {
@@ -155,23 +167,56 @@ export const BoardView = (props) => {
                                 </>
                             )
                             }
+                            {challenger.urls.length > 0 && (
+                                <>
+                                    <PreDivSection>Urls:</PreDivSection>
+                                    <DivSectionVideo>
+                                        {challenger.urls.map((url, i) => {
+                                            return (
+                                                <DivStructureVideo key={i}>
+                                                    <a href={url} target="_blank"><VideoIcon src={enlace} /></a>
+                                                    <div>Enlace {i + 1}</div>
+                                                </DivStructureVideo>
+                                            )
+                                        })}
+                                    </DivSectionVideo>
+
+                                </>
+                            )
+                            }
+                            {challenger.free_clues.length > 0 && (
+                                <>
+                                    <PreDivSection>Pistas Gratis:</PreDivSection>
+                                    <ul>
+                                        {challenger.free_clues.map((clue, i) => {
+                                            return showClue(clue) == true ? (
+                                                <ClueShow key={i}>{clue}</ClueShow>
+                                            ) : (
+                                                    <ClueHide key={i} onClick={() => { useFreeClue(i) }}>Mostrar Pista</ClueHide>
+                                                )
+                                        })}
+                                    </ul>
+                                </>
+                            )
+                            }
+
                             {
                                 showAnswerCheck(challenger._id) == true ?
                                     (
                                         <div> {challenger.correct_response} </div>
                                     ) :
                                     (
-                                        <form onSubmit={handleSubmit(checkAnswer)}>
+                                        <FormAnswer onSubmit={handleSubmit(checkAnswer)}>
                                             <input name="answer"
                                                 ref={register({
                                                     required: false
-                                                })} />
+                                                })} autoComplete="off" />
                                             <input type="submit" value="Comprobar" />
-                                        </form>
+                                        </FormAnswer>
                                     )
                             }
                         </DivChallenger>
-                    </div>
+                    </MainContent>
                 )
                 : (
                     <Loading />
