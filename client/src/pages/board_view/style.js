@@ -64,7 +64,7 @@ margin-bottom: 0.3em;
 `
 export const DivSection = styled.div`
 padding: 0.5em 0.3em;
-background-color: #f9f9f9;
+background-color: #e2e1e1;
 box-shadow: 0px 0px 3px 0px #888888ad;
 border-radius: 5px; 
 margin-bottom: 1em;
@@ -85,7 +85,7 @@ display: flex;
 width: 100%;
 margin-bottom: 1em;
 padding: 0.5em 0.3em;
-background-color: #f9f9f9;
+background-color: #e2e1e1;
 box-shadow: 0px 0px 3px 0px #888888ad;
 border-radius: 5px;
 `
@@ -142,7 +142,7 @@ cursor: pointer;
 `
 export const ClueShow = styled.li`
 padding: 0.3em 0.3em;
-background-color: #f9f9f9;
+background-color: #e2e1e1;
 box-shadow: 0px 0px 3px 0px #888888ad;
 border-radius: 5px;
 margin-bottom: 0.5em;
@@ -151,6 +151,54 @@ export const FormAnswer = styled.form`
 display: flex;
 flex-direction: column;
 margin-top: 2em;
+`
+export const InputAnswer = styled.input`
+    font-size: 1.3em;
+    color: #db6400;
+    min-height: 2em;
+    border-radius: 5px 5px 0px 0px;
+    text-align: center;
+    border: none;
+    margin-bottom: 0.3em;
+    border-bottom: 3px solid #9ec4cc;
+    &:focus {
+        border-bottom: 3px solid #16697a;
+    }
+    ::placeholder {
+        color: #c5c5c5;
+    }
+`
+export const InputButtonAnswer = styled.input`
+background-color: #16697a;
+border: none;
+padding: 0.4em;
+border-radius: 5px;
+font-size: 1.1em;
+color: white;
+cursor: pointer;
+box-shadow: 0px 0px 3px 0px #888888ad;
+&:hover {
+    transition: all 0.5s ease-out;
+    background-color: #66a8b58c;
+    color: #16697a;
+}
+`
+export const DivShowAnswer = styled.div`
+    font-size: 1.3em;
+    color: #db6400;
+    min-height: 2em;
+    border-radius: 5px 5px 0px 0px;
+    text-align: center;
+    border: none;
+    margin: 0.5em;
+    border-bottom: 3px solid #9ec4cc;
+`
+
+export const DivFail = styled.div`
+margin: 0.3em;
+color: #d60000;
+text-align: center;
+font-size: 1.1em;
 `
 
 export const MainContent = styled.div`

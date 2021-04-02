@@ -5,13 +5,16 @@ import 'react-popper-tooltip/dist/styles.css';
 // Service
 import { getBoard, updateBoard, updateCluesFreeBoard } from "../../services/Board_Service"
 import { findChallengerFN } from "../../services/Challenger_Services"
+// Fail Phrase Function
+import { randomPhrase } from "./fail_phrase"
 // Loading
 import { Loading } from "../../components/Loading/index"
 // Styles
 import {
     UlProgressBar, LiProgressCirclesDone, LiProgressCirclesCurrent, LiProgressCirclesToDo, Title, DivChallenger,
     CurrentNumber, DivSection, PreDivSection, DivSectionImg, ImgEmbed, DivSectionVideo, VideoIcon, DivStructureVideo,
-    DivSectionInfo, DivInfo, MainContent, ClueHide, ClueShow, FormAnswer
+    DivSectionInfo, DivInfo, MainContent, ClueHide, ClueShow, FormAnswer, InputAnswer, InputButtonAnswer, DivFail,
+    DivShowAnswer,
 } from "./style"
 import { Div70width } from "../../globalStyles/containers"
 // Images
@@ -23,6 +26,8 @@ export const BoardView = (props) => {
     const [challenger, setChallenger] = useState()
     const [challengersDone, setChallengersDone] = useState()
     const [idBoard, setIdBoard] = useState()
+    const [fail, setFail] = useState()
+
 
     const { register, handleSubmit } = useForm({
         mode: "onSubmit"
@@ -39,6 +44,11 @@ export const BoardView = (props) => {
             getBoard(idBoard).then(result => {
                 setBoard(result.boardFound)
                 currentChallenger(result.boardFound.challengersToDo[0])
+
+                /*  let time = result.boardFound.startTime
+                  console.log(time - time2)
+                  console.log(Math.floor((Date.now() / (1000 * 60 * 60)) % 24))
+                  */
             })
         }
     }, [idBoard])
@@ -66,12 +76,14 @@ export const BoardView = (props) => {
                 if (result.status == 200) {
                     setBoard(result.boardUpdated)
                     currentChallenger(result.boardUpdated.challengersToDo[0])
+                    setFail(false)
                 } else {
                     console.log(result.message)
                 }
             })
         } else {
             console.log("Respuesta Incorrecta...")
+            setFail(randomPhrase())
         }
     }
     // Comprobación de Pistas Utilizadas
@@ -203,15 +215,20 @@ export const BoardView = (props) => {
                             {
                                 showAnswerCheck(challenger._id) == true ?
                                     (
-                                        <div> {challenger.correct_response} </div>
+                                        <>
+                                            <PreDivSection>Respuesta Correcta:</PreDivSection>
+                                            <DivShowAnswer> {challenger.correct_response} </DivShowAnswer>
+                                        </>
                                     ) :
                                     (
                                         <FormAnswer onSubmit={handleSubmit(checkAnswer)}>
-                                            <input name="answer"
+                                            <PreDivSection>¿Tienes la solución? Introdúcela aquí:</PreDivSection>
+                                            {fail && (<DivFail> <b>✘</b> {fail}</DivFail>)}
+                                            <InputAnswer name="answer"
                                                 ref={register({
                                                     required: false
-                                                })} autoComplete="off" />
-                                            <input type="submit" value="Comprobar" />
+                                                })} autoComplete="off" placeholder={`La respuesta tiene ${challenger.correct_response.length} caracteres`} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = `La respuesta tiene ${challenger.correct_response.length} caracteres`} />
+                                            <InputButtonAnswer type="submit" value="Comprobar" />
                                         </FormAnswer>
                                     )
                             }
