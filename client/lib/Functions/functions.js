@@ -170,8 +170,16 @@ export const getSumDuration = (arr) => {
 }
 
 // LOCATION: Get "localidad" of address ----------->
-
 export const getLocality = (str) => {
     const arr = str.split(",")
     return arr[1]
+}
+
+// Time Duration to Done Game
+export const timeToEnd = (start) => {
+    let difTime = (Date.now() - Date.parse(start))
+    const hours = Math.floor((difTime / (1000 * 60 * 60)) % 24)
+    const minutes = Math.floor((difTime / (1000 * 60)) % 60)
+    const seconds = Math.floor((difTime / 1000) % 60)
+    return { hours: hours, minutes: minutes, seconds: seconds }
 }
