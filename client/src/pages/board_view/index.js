@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form"
 import { usePopperTooltip } from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
 // Service
-import { getBoard, updateBoard, updateCluesFreeBoard } from "../../services/Board_Service"
+import { getBoard, updateBoard, updateCluesFreeBoard, endGameTime } from "../../services/Board_Service"
 import { findChallengerFN } from "../../services/Challenger_Services"
+// Functions
+import { timeToEnd } from "../../../lib/Functions/functions"
 // Fail Phrase Function
 import { randomPhrase } from "./fail_phrase"
 // Loading
@@ -44,11 +46,6 @@ export const BoardView = (props) => {
             getBoard(idBoard).then(result => {
                 setBoard(result.boardFound)
                 currentChallenger(result.boardFound.challengersToDo[0])
-
-                /*  let time = result.boardFound.startTime
-                  console.log(time - time2)
-                  console.log(Math.floor((Date.now() / (1000 * 60 * 60)) % 24))
-                  */
             })
         }
     }, [idBoard])
@@ -74,9 +71,18 @@ export const BoardView = (props) => {
             challengersDone.push(removeChallenger) // Lo envío al array de challengers hechos.
             updateBoard({ id: board._id, challengersToDo, challengersDone }).then(result => {
                 if (result.status == 200) {
-                    setBoard(result.boardUpdated)
-                    currentChallenger(result.boardUpdated.challengersToDo[0])
                     setFail(false)
+                    if (result.boardUpdated.challengersToDo[0]) {
+                        setBoard(result.boardUpdated)
+                        currentChallenger(result.boardUpdated.challengersToDo[0])
+                    } else {
+                        // END GAME
+                        const startGame = result.boardUpdated.startTime
+                        const endTime = timeToEnd(startGame)
+                        console.log(endTime)
+                        const id = result.boardUpdated._id
+                        endGameTime({ id, endTime })
+                    }
                 } else {
                     console.log(result.message)
                 }

@@ -55,5 +55,16 @@ router.post("/freeCluesUsed", async (req, res) => {
 
 })
 
+/** End Time Game Update **/
+router.post("/endGameTime", async (req, res) => {
+    const { id, endTime } = req.body
+    await Board.findByIdAndUpdate({
+        _id: id
+    }, {
+        endTime: endTime,
+        endGame: true
+    })
+})
+
 
 module.exports = router

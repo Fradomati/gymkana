@@ -34,3 +34,11 @@ export const updateCluesFreeBoard = async ({ id, cluesUsed }) => {
     })
     return response.data
 }
+
+export const endGameTime = async ({ id, endTime }) => {
+    const response = await boardService.post("/endGameTime", {
+        id,
+        endTime
+    })
+    return response.data
+}
