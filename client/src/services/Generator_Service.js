@@ -58,3 +58,12 @@ export const removeChallengerOfGame = async ({ challenger_id, game_id }) => {
     })
     return response.data
 }
+
+/* Pass ID of Board finished to the Game */
+export const passBoardEndToGameRanking = async ({ game_id, board_id }) => {
+    const response = await generatorService.post("/sendBoardEndedToRanking", {
+        game_id,
+        board_id
+    })
+    return response.data
+}

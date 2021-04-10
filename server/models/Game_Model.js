@@ -8,7 +8,7 @@ const GameModel = new Schema(
         description: String,
         category: { type: Array },
         tags: { type: Array },
-        ranking: [{ type: Schema.Types.ObjectId, ref: "User" }],
+        ranking: [{ type: Schema.Types.ObjectId, ref: "Board" }],
         challengers: [{ type: Schema.Types.ObjectId, ref: "Challenger" }],
         schedule_day: { type: Date },
         share_url: String,

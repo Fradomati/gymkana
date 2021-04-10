@@ -81,17 +81,29 @@ router.get("/getGame/:share_url", async (req, res) => {
 
 router.post("/updatePositionsOfChallengers", async (req, res) => {
     const { gameID, idsCGER } = req.body
-
-    console.log("ACTUALIZACIÓN ----->", idsCGER)
     await Game.findByIdAndUpdate({ _id: gameID }, {
         challengers: idsCGER
     })
+    const updated = await Game.findById({ _id: gameID })
+    if (updated) {
+        res.json({ status: 200, updated })
+    } else {
+        res.json({ status: 500, message: "No se pudo actualizar la posición de las pruebas" })
+    }
+})
 
-    const update = await Game.findById({ _id: gameID })
+/** Pass Board END to the Ranking **/
+router.post("/sendBoardEndedToRanking", async (req, res) => {
+    const { game_id, board_id } = req.body
+    await Game.findByIdAndUpdate({
+        _id: game_id
+    }, {
+        $push: { ranking: board_id }
+    })
 
-    console.log("ACTUALIZACIÓN 2 ---->", update)
-    if (update) {
-        res.json({ status: 200, update })
+    const updated = await Game.findById({ _id: game_id })
+    if (updated) {
+        res.json({ status: 200, updated })
     } else {
         res.json({ status: 500, message: "No se pudo actualizar la posición de las pruebas" })
     }

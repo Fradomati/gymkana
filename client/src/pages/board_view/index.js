@@ -5,6 +5,7 @@ import 'react-popper-tooltip/dist/styles.css';
 // Service
 import { getBoard, updateBoard, updateCluesFreeBoard, endGameTime } from "../../services/Board_Service"
 import { findChallengerFN } from "../../services/Challenger_Services"
+import { passBoardEndToGameRanking } from "../../services/Generator_Service"
 // Functions
 import { timeToEnd } from "../../../lib/Functions/functions"
 // Fail Phrase Function
@@ -82,6 +83,8 @@ export const BoardView = (props) => {
                         console.log(endTime)
                         const id = result.boardUpdated._id
                         endGameTime({ id, endTime })
+                        // Paso ID del Board al ranking del juego
+                        passBoardEndToGameRanking({ game_id: result.boardUpdated.game, board_id: id })
                     }
                 } else {
                     console.log(result.message)
