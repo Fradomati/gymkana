@@ -3,9 +3,10 @@ import { Link } from "react-router-dom"
 
 // Services
 import { getAllGamesFN } from "../../services/Generator_Service"
-
 // Components
 import { Loading } from "../../components/Loading"
+// Test
+import { AlbertiTool } from "../../components/Tools_Games//Alberti/index"
 
 export const Home = () => {
     const [gamesFound, setGamesFound] = useState()
@@ -18,13 +19,16 @@ export const Home = () => {
 
     if (gamesFound) {
         return (
-            <ul>
-                {gamesFound.map((e, i) => {
-                    return (
-                        <li key={i} ><Link to={`/game/${e.share_url}`}>{e.title}</Link></li>
-                    )
-                })}
-            </ul>
+            <>
+                <ul>
+                    {gamesFound.map((e, i) => {
+                        return (
+                            <li key={i} ><Link to={`/game/${e.share_url}`}>{e.title}</Link></li>
+                        )
+                    })}
+                </ul>
+                <AlbertiTool />
+            </>
         )
     } else {
         return (
