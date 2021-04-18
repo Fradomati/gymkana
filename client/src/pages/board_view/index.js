@@ -17,12 +17,15 @@ import {
     UlProgressBar, LiProgressCirclesDone, LiProgressCirclesCurrent, LiProgressCirclesToDo, Title, DivChallenger,
     CurrentNumber, DivSection, PreDivSection, DivSectionImg, ImgEmbed, DivSectionVideo, VideoIcon, DivStructureVideo,
     DivSectionInfo, DivInfo, MainContent, ClueHide, ClueShow, FormAnswer, InputAnswer, InputButtonAnswer, DivFail,
-    DivShowAnswer,
+    DivShowAnswer, UlToolBar, LiToolBar,
 } from "./style"
-import { Div70width } from "../../globalStyles/containers"
+// Tools
+import { AlbertiTool } from "../../components/Tools_Games/AllTools/Alberti"
+import { Squares } from "../../components/Tools_Games/AllTools/Grid"
 // Images
 import play from "../../../public/images/play.svg"
 import enlace from "../../../public/images/enlace.svg"
+import { set } from "lodash";
 
 export const BoardView = (props) => {
     const [board, setBoard] = useState()
@@ -30,6 +33,9 @@ export const BoardView = (props) => {
     const [challengersDone, setChallengersDone] = useState()
     const [idBoard, setIdBoard] = useState()
     const [fail, setFail] = useState()
+    const [toolBar, setToolBar] = useState(false)
+    const [tool, setTool] = useState(false)
+    const [closeTool, setCloseTool] = useState(false)
 
 
     const { register, handleSubmit } = useForm({
@@ -105,6 +111,36 @@ export const BoardView = (props) => {
         const cluesUsed = board.cluesUsed
         const id = localStorage.getItem("currentBoard")
         updateCluesFreeBoard({ id, cluesUsed }).then(board => setBoard(board.boardUpdated))
+    }
+    // Apertura de barra de herramientas
+    const openToolBar = () => {
+        toolBar == true ? setToolBar(false) : setToolBar(true)
+    }
+    // Apertura de Herramienta
+    const openTool = (toolSelected) => {
+        switch (toolSelected) {
+            case "Alberti":
+                if (closeTool == "Alberti") {
+                    setTool(false)
+                    setCloseTool(false)
+                } else {
+                    setCloseTool(toolSelected)
+                    setTool(<AlbertiTool />)
+                }
+                break;
+            case "Grid":
+                if (closeTool == "Grid") {
+                    setTool(false)
+                    setCloseTool(false)
+                } else {
+                    setCloseTool(toolSelected)
+                    setTool(<Squares />)
+                }
+                break;
+            default:
+                setTool(false)
+                break;
+        }
     }
 
     // Burbujas informativas
@@ -220,6 +256,15 @@ export const BoardView = (props) => {
                                 </>
                             )
                             }
+                            <PreDivSection>Herramientas</PreDivSection>
+
+                            <UlToolBar>
+                                <LiToolBar title="Cifrado de Alberti" onClick={() => openTool("Alberti")}>Al</LiToolBar>
+                                <LiToolBar title="Cuadrícula" onClick={() => openTool("Grid")}>Cr</LiToolBar>
+                            </UlToolBar>
+
+
+                            {tool && (tool)}
 
                             {
                                 showAnswerCheck(challenger._id) == true ?

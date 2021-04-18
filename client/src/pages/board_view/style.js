@@ -204,3 +204,22 @@ font-size: 1.1em;
 export const MainContent = styled.div`
 padding-bottom: 10em;
 `
+
+export const UlToolBar = styled.ul`
+min-height: 1.5em;
+display: flex;
+`
+export const LiToolBar = styled.li`
+padding: 0.5em 0.6em;
+cursor: pointer;
+color: white;
+font-weight: bold;
+background-color: #16697a;
+border-radius: 5px;
+&:hover {
+    transition: all 0.5s ease-out;
+    background-color: #66a8b58c;
+    color: #16697a;
+}
+`
+

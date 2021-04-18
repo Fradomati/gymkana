@@ -8,7 +8,8 @@ import {
     LiStatic_B,
     LiDynamic_A,
     LiDynamic_B,
-    UlDinamic
+    UlDinamic,
+    TitleDiv
 } from "./style";
 
 const abc = [
@@ -45,7 +46,7 @@ export const AlbertiTool = (props) => {
     return (
         <ParentDiv>
             <ChildDiv>
-                <div>Cifrado de Alberti</div>
+                <TitleDiv>Cifrado de Alberti</TitleDiv>
                 <UlStatic>
                     {abc.map((l, i) => {
                         return i % 2 == 0 ? (
