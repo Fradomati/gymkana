@@ -6,7 +6,6 @@ import { getAllGamesFN } from "../../services/Generator_Service"
 // Components
 import { Loading } from "../../components/Loading"
 // Test
-import { AlbertiTool } from "../../components/Tools_Games//Alberti/index"
 
 export const Home = () => {
     const [gamesFound, setGamesFound] = useState()
@@ -27,7 +26,6 @@ export const Home = () => {
                         )
                     })}
                 </ul>
-                <AlbertiTool />
             </>
         )
     } else {

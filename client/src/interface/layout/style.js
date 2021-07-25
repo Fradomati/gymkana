@@ -11,7 +11,9 @@ export const GlobalContainer = styled.div`
 export const MainContentContainer = styled.div`
 width: 100%;
 height: 100%;
-background-color: #f8f1f1;
+background-color: #f8f1f1; 
+/* background-color: #16697a; */
+
 overflow: scroll;
 display: flex;
 justify-content: center;

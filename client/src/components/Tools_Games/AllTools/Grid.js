@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { ParentDiv, ChildDiv, UlGrid, LiGrid, InputGrid } from "./syles";
+import { ParentDiv, ChildDiv, UlGrid, LiGrid, InputGrid } from "./style";
 
 export const Squares = (props) => {
     const [count, setCount] = useState(3);

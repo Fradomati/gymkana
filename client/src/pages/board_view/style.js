@@ -211,6 +211,7 @@ display: flex;
 `
 export const LiToolBar = styled.li`
 padding: 0.5em 0.6em;
+margin: 0 0.2em;
 cursor: pointer;
 color: white;
 font-weight: bold;
