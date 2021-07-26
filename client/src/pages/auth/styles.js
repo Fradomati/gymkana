@@ -15,7 +15,7 @@ min-height: 400px;
  width: 30vw;
  height: 60vh;
  border-radius: 10px;
- border: 0.5px solid #bfc6c7;
+ border: 2.5px solid #bfc6c7;
 //  transition: border 1s;
 //  &:hover {
 //     border: 1px solid #18697a;
@@ -32,15 +32,15 @@ align-items: center;
 `
 export const InputAuth = styled.input`
     width: 80%;
-    margin: 0.5vh 0;
     border: none;
     border-bottom: 2px solid #18697a;
     margin: 0.5em 0;
     padding: 0.4em;
     background-color: #f9f1f1;
+    transition: border-bottom linear 0.2s;
     &:focus {
-        box-shadow: 0px 2px 5px #615f5f;
-        background-color: white;
+        color: #18697a;
+        border-bottom: 4px solid #18697a;
     }
 `
 
@@ -77,8 +77,12 @@ export const NavAuth = styled.div`
 
 export const ModuleAuth = styled.div`
     width: 50%;
-    text-align: center;
+    text-align: right;
     padding: 1em 0em;
+    color: grey;
+    &:hover {
+        color: black;
+    }
 `
 export const ErrorTxt = styled.div`
 margin: 0.3em 0;
@@ -92,4 +96,12 @@ export const Title = styled.h2`
 font-size: 1.5em;
 color: #18697a;
 font-weight: bold;
+`
+export const DivShowPassword = styled.div`
+width: 80%;
+font-size: 0.8em;
+color: grey;
+display: flex;
+justify-content: flex-end;
+align-items: center;
 `

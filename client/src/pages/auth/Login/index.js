@@ -1,21 +1,21 @@
-import React from "react"
+import React, {useState} from "react"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import { loginFn } from "../../../services/Auth_Service"
 
 // Styles
-import { ContainerGlobal, ContainerPreForm, ContainerForm, InputAuth, NavAuth, ModuleAuth, Title, Submit } from "../styles"
+import { ContainerGlobal, ContainerPreForm, ContainerForm, InputAuth, NavAuth, ModuleAuth, Title, Submit, DivShowPassword } from "../styles"
 
+// Basic Functions
+import { showPass } from "../../../../lib/Functions/_functions"
 
 export const Login = () => {
-
+    const [typePassword, setTypePassword] = useState("password")
     const { register, handleSubmit, errors } = useForm(
         {
             mode: "onSubmit"
         }
     );
-
-
     const onSubmit = async (data) => {
         const responseServer = await loginFn(data);
 
@@ -29,6 +29,10 @@ export const Login = () => {
             // history.push("/")
         }
     };
+    // Show the password into the input
+    const showPassword = () => {
+        setTypePassword(showPass(typePassword))
+   }
 
     return (
         <ContainerGlobal>
@@ -37,7 +41,7 @@ export const Login = () => {
                     <ModuleAuth className="nav-left">
                     </ModuleAuth>
                     <ModuleAuth>
-                        <Link to="/signup">Registro</Link>
+                        <Link style={{marginRight: "0.8em"}} to="/signup">Registro</Link>
                     </ModuleAuth>
                 </NavAuth>
                 <ContainerForm>
@@ -45,15 +49,15 @@ export const Login = () => {
                 </ContainerForm>
                 <ContainerForm onSubmit={handleSubmit(onSubmit)}>
                     {/* {err && (<P>{err}</P>)} */}
-                    <InputAuth type="text" placeholder="Email" name="mail" ref={register({
+                    <InputAuth type="text" placeholder="Email" name="mail" autoComplete="off" ref={register({
                         required: true,
                         pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
                     })} />
 
-                    <InputAuth type="text" placeholder="Contraseña" name="password" ref={register({
+                    <InputAuth type="text" placeholder="Contraseña" name="password" autoComplete="off"  type={typePassword} ref={register({
                         required: true, min: 8,
                     })} />
-
+                    <DivShowPassword><input type="checkbox" onClick={showPassword}/> Ver contraseña</DivShowPassword>
                     <Submit type="submit" />
                     <Link to="/#"><span>¿Has olvidado la contraseña?</span></Link>
                 </ContainerForm>

@@ -77,7 +77,7 @@ textarea:focus, input:focus, button:focus{
 /* Background Color Auth Form to Login or Signup */
 .form-login {
 	background-color: #f9f1f1;
-    transition: box-shadow  linear 1s;
+    transition: box-shadow  linear 0.5s;
 }
 
 .form-login:hover {
@@ -86,7 +86,7 @@ textarea:focus, input:focus, button:focus{
 
 .form-signup {
 	background-color: #f9f1f1;
-    transition: box-shadow 1s;
+    transition: box-shadow linear 0.5s;
 }
 
 .form-signup:hover {
