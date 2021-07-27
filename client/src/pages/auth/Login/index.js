@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, withRouter } from 'react-router-dom'
 import { loginFn } from '../../../services/Auth_Service'
@@ -19,7 +19,11 @@ import {
 // Basic Functions
 import { showPass } from '../../../../lib/Functions/_functions'
 
+// User Session
+import { UserSessionContext } from '../../../../lib/Authentication/withAuthentication'
+
 export const Login = withRouter(({ history }) => {
+  const [userLoaded, setUserLoaded] = useContext(UserSessionContext)
   const [typePassword, setTypePassword] = useState('password')
   const { register, handleSubmit, errors } = useForm({
     mode: 'onSubmit',
@@ -31,8 +35,9 @@ export const Login = withRouter(({ history }) => {
       setErr(responseServer.message)
     } else {
       console.log('Logged')
-      setUserOn(responseServer)
-      localStorage.setItem('sessionOn', true)
+      // Es necesario? O simplemente llevándolo a "/" con el authentificator bastaría?
+      setUserLoaded(responseServer)
+      localStorage.setItem('userSession', true)
       history.push('/')
     }
   }
