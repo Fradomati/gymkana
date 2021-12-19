@@ -41,7 +41,7 @@ router.post("/signup", async (req, res) => {
         // sendEmail(email, "welcome")
 
         console.log("Register", username, "done")
-        res.json({ status: 200, message: `${username} register` })
+        res.json({ status: 200, message: `${username} register`, email: email, password: password })
         // req.logIn(newUser, (err) => {
         //     res.json(
         //         _.pick(req.user, ["username", "_id", "createdAt", "updatedAt"])

@@ -32,6 +32,9 @@ export const Signup = withRouter(({ history }) => {
     if (responseServer.status == 417) {
       setErr(responseServer.message)
     } else {
+      console.log(responseServer)
+      localStorage.setItem("temporalEmail", responseServer.email)
+      localStorage.setItem("temporalPass", responseServer.password)
       console.log('Registrado!')
       history.push('/login')
     }
