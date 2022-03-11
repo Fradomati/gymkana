@@ -22,6 +22,5 @@ export const MainContentContainer = styled.div`
 export const ContentContainer = styled.div`
   width: 70%;
   height: 100%;
-  padding-top: 30vh;
-  margin-bottom: 10em;
+  margin-top: 5em;
 `
