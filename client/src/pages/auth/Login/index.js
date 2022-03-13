@@ -31,21 +31,23 @@ export const Login = withRouter(({ history }) => {
   let temporalEmail
   let temporalPass
   // Fast login after signup
- if(localStorage.getItem('temporalEmail')&& localStorage.getItem('temporalPass')) {
-    temporalEmail = localStorage.getItem('temporalEmail') 
+  if (
+    localStorage.getItem('temporalEmail') &&
+    localStorage.getItem('temporalPass')
+  ) {
+    temporalEmail = localStorage.getItem('temporalEmail')
     temporalPass = localStorage.getItem('temporalPass')
   }
 
-
   const onSubmit = async (data) => {
-    const responseServer = await loginFn(data) 
+    const responseServer = await loginFn(data)
 
     if (responseServer.status == 417) {
       setErr(responseServer.message)
     } else {
       console.log('Logged')
       // Es necesario? O simplemente llevándolo a "/" con el authentificator bastaría?
-      // setUserLoaded(responseServer)
+      setUserLoaded(responseServer)
       // Clean Fast Login
       localStorage.removeItem('temporalEmail')
       localStorage.removeItem('temporalPass')
@@ -80,7 +82,7 @@ export const Login = withRouter(({ history }) => {
             placeholder="Email"
             name="mail"
             autoComplete="off"
-            defaultValue = {temporalEmail}
+            defaultValue={temporalEmail}
             ref={register({
               required: true,
               pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,

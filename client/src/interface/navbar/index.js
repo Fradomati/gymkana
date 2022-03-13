@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { logoutFN } from '../../services/Auth_Service'
 
 // Styles
 import { MainNavContainer, ULBar, Li, BtnMobile } from './style'
 
+// User Session
+import { UserSessionContext } from '../../../lib/Authentication/withAuthentication'
+
 export const NavBar = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const [userLoaded, setUserLoaded] = useContext(UserSessionContext)
 
   const mobileNav = () => {
     setMobileMenu(!mobileMenu)
@@ -15,9 +20,13 @@ export const NavBar = () => {
     const changeWidth = () => {
       setScreenWidth(window.innerWidth)
     }
-
     window.addEventListener('resize', changeWidth)
   }, [])
+
+  const logout = () => {
+    logoutFN
+    setUserLoaded(false)
+  }
 
   return (
     <MainNavContainer>
@@ -30,10 +39,10 @@ export const NavBar = () => {
       {(mobileMenu || screenWidth > 500) && (
         <ULBar>
           <Link to="/">
-            <Li>Example 1</Li>
+            <Li>Inicio</Li>
           </Link>
           <Li>Example 2</Li>
-          <Li>Example 3</Li>
+          <Li onClick={logout}>Salir -></Li>
         </ULBar>
       )}
     </MainNavContainer>

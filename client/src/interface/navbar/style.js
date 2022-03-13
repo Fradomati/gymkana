@@ -39,6 +39,7 @@ export const Li = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   &:hover {
     color: #ffa62b;
     font-size: 1.1em;
@@ -52,9 +53,9 @@ export const Li = styled.li`
 export const BtnMobile = styled.button`
   background: none;
   border: none;
-  font-size: 1em;
+  font-size: 1.2em;
   transform: rotate(90deg);
   padding: 0.5em;
   font-weight: bold;
-  color: #16697a;
+  color: white;
 `
