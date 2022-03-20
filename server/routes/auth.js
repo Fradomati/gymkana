@@ -132,8 +132,10 @@ router.post('/logout', async (req, res) => {
   if (req.user) {
     console.log(req.user)
     req.logout()
+    // req.session.destroy() // No necesario
     return res.json({ status: 'Logout OK' })
   } else {
+    console.log('Nop')
     res.status(401).json({ status: 'You are not logged' })
   }
 })

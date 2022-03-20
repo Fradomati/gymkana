@@ -42,6 +42,7 @@ export const modifyFN = async (data, id) => {
 }
 
 export const logoutFN = async () => {
+  console.log('Logout?')
   const response = await authService.post('/logout')
   console.log('LogoutFN: ', response.data)
   return response.data

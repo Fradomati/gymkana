@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, { useState, useEffect, createContext, useContext } from 'react'
 // Services
 import { whoameFN } from '../../src/services/Auth_Service'
 // Components
@@ -13,6 +13,7 @@ export const withAuthentication = (Component) => () => {
   useEffect(() => {
     whoameFN()
       .then((user) => {
+        console.log('user ->', user)
         setUserLoaded(user)
       })
       .catch((e) => {

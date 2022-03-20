@@ -37,7 +37,7 @@ export const NavBarLogout = () => {
             <Li>Entrar</Li>
           </Link>
           <Link to="/signup">
-            <Li>Registrar</Li>
+            <Li>¡Únete!</Li>
           </Link>
         </ULBar>
       )}

@@ -23,8 +23,8 @@ export const NavBar = () => {
     window.addEventListener('resize', changeWidth)
   }, [])
 
-  const logout = () => {
-    logoutFN
+  const logout = async () => {
+    await logoutFN()
     setUserLoaded(false)
   }
 
