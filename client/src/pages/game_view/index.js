@@ -24,6 +24,7 @@ export const GameView = withRouter(({ match, history }) => {
   const [game, setGame] = useState()
   const context = useContext(UserSessionContext)
   const user = context[0]
+  const userID = user._id
 
   useEffect(() => {
     getGameFN({ share_url }).then((result) => {
@@ -32,15 +33,15 @@ export const GameView = withRouter(({ match, history }) => {
   }, [])
 
   const crearTablero = (game_id, challengers) => {
-    createBoard({ game_id, challengers }).then((result) => {
+    createBoard({ game_id, challengers, userID }).then((result) => {
       console.log(result)
       if (result.status == 200) {
         history.push(`/board/${game.title}`)
         localStorage.setItem('currentBoard', result.newBoard._id)
       }
-      // Meter aquí el History que lleve a la página del tablero actual, si el status = 200
     })
   }
+  console.log(game)
 
   return (
     <>
@@ -57,7 +58,9 @@ export const GameView = withRouter(({ match, history }) => {
             <SpaceOne />
             <CenterFlexContainer>
               {!user ? (
-                <p>Nop</p>
+                <OrangeButton onClick={() => history.push('/login')}>
+                  ¡Inicia Sesión y Prueba!
+                </OrangeButton>
               ) : (
                 <OrangeButton
                   onClick={() => {
