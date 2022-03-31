@@ -1,13 +1,17 @@
-import { boardService } from './Connections'
+import { boardService, authService } from './Connections'
 
-export const createBoard = async ({ game_id, challengers, userID }) => {
-  const response = await boardService.post('/createBoard', {
+export const createBoard = async ({ game_id, challengers, user_id }) => {
+  const responseBoard = await boardService.post('/createBoard', {
     game_id,
     challengers,
-    userID,
+    user_id,
+  })
+  const responseUser = await authService.post('/addBoardToUser', {
+    game_id,
+    user_id,
   })
 
-  return response.data
+  return [responseBoard.data, responseUser.data]
 }
 
 export const getBoard = async (id) => {

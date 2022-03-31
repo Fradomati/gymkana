@@ -35,7 +35,7 @@ export const GameView = withRouter(({ match, history }) => {
   const crearTablero = (game_id, challengers) => {
     createBoard({ game_id, challengers, userID }).then((result) => {
       console.log(result)
-      if (result.status == 200) {
+      if (result[0].status == 200) {
         history.push(`/board/${game.title}`)
         localStorage.setItem('currentBoard', result.newBoard._id)
       }
