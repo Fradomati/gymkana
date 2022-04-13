@@ -10,7 +10,7 @@ export const createBoard = async ({ game_id, challengers, user_id }) => {
     game_id,
     user_id,
   })
-
+  console.log('Board', responseBoard.data, 'User', responseUser.data)
   return [responseBoard.data, responseUser.data]
 }
 
