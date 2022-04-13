@@ -1,11 +1,9 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-// Function to add boardId default
-import { randomIds } from '../lib/scripts'
 
 const BoardsModel = new Schema(
   {
-    boardId: { type: String, default: randomIds() },
+    boardId: { type: String },
     startTime: { type: Date, default: Date.now },
     endTime: {
       type: Object,
