@@ -33,8 +33,8 @@ export const Signup = withRouter(({ history }) => {
       setErr(responseServer.message)
     } else {
       console.log(responseServer)
-      localStorage.setItem("temporalEmail", responseServer.email)
-      localStorage.setItem("temporalPass", responseServer.password)
+      localStorage.setItem('temporalEmail', responseServer.email)
+      localStorage.setItem('temporalPass', responseServer.password)
       console.log('Registrado!')
       history.push('/login')
     }
@@ -102,10 +102,10 @@ export const Signup = withRouter(({ history }) => {
             <ErrorTxt>Contraseña: {errors?.password?.message}</ErrorTxt>
           )}
           {err && (
-            <TextForgot>
+            <div>
               {err}
               <a href="/login"> ¿Iniciar Sesión?</a>
-            </TextForgot>
+            </div>
           )}
         </ContainerForm>
       </ContainerPreForm>

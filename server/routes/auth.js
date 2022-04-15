@@ -144,12 +144,12 @@ router.post('/addBoardToUser', async (req, res) => {
   const { game_id } = req.body
   const user_id = req.user._id
   const user = await User.findById({ _id: user_id })
-  if (user.boardsStarted.includes(game_id)) {
-    res.status(500).json({ status: 'Juego ya activado' })
+  if (user.gamesStarted.includes(game_id)) {
+    res.status(203).json({ status: 'Juego ya activado' })
   } else {
     await User.findByIdAndUpdate(
       { _id: user_id },
-      { $push: { boardsStarted: game_id } },
+      { $push: { gamesStarted: game_id } },
     )
     res.status(200).json({ status: '¡Juego agregado!' })
   }

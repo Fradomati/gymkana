@@ -23,8 +23,10 @@ export const GameView = withRouter(({ match, history }) => {
   const share_url = match.params.share_url
   const [game, setGame] = useState()
   const context = useContext(UserSessionContext)
+  // Info of user
   const user = context[0]
   const userID = user._id
+  const gamesStarted = user.gameStarted
 
   useEffect(() => {
     getGameFN({ share_url }).then((result) => {
@@ -37,7 +39,10 @@ export const GameView = withRouter(({ match, history }) => {
       console.log(result)
       if (result[0].status == 200) {
         history.push(`/board/${game.title}`)
-        localStorage.setItem('currentBoard', result.newBoard._id)
+        console.log(result)
+        localStorage.setItem('currentBoard', result[0].newBoard._id)
+      } else if (result[0].status == 203) {
+        console.log('error')
       }
     })
   }
