@@ -140,8 +140,9 @@ router.post('/logout', async (req, res) => {
   }
 })
 
-router.post('/addBoardToUser', async (req, res) => {
-  const { game_id } = req.body
+router.post('/addGameToUser', async (req, res) => {
+  const { game_id, board_id } = req.body
+  console.log('Board id', board_id)
   const user_id = req.user._id
   const user = await User.findById({ _id: user_id })
   if (user.gamesStarted.includes(game_id)) {
@@ -149,7 +150,7 @@ router.post('/addBoardToUser', async (req, res) => {
   } else {
     await User.findByIdAndUpdate(
       { _id: user_id },
-      { $push: { gamesStarted: game_id } },
+      { $push: { gamesStarted: game_id, boardsStarted: board_id } },
     )
     res.status(200).json({ status: '¡Juego agregado!' })
   }

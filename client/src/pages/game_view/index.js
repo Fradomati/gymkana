@@ -26,7 +26,7 @@ export const GameView = withRouter(({ match, history }) => {
   // Info of user
   const user = context[0]
   const userID = user._id
-  const gamesStarted = user.gameStarted
+  const gamesStarted = user.gamesStarted
 
   useEffect(() => {
     getGameFN({ share_url }).then((result) => {
@@ -46,7 +46,6 @@ export const GameView = withRouter(({ match, history }) => {
       }
     })
   }
-  console.log(game)
 
   return (
     <>
@@ -65,6 +64,14 @@ export const GameView = withRouter(({ match, history }) => {
               {!user ? (
                 <OrangeButton onClick={() => history.push('/login')}>
                   ¡Inicia Sesión y Prueba!
+                </OrangeButton>
+              ) : gamesStarted.includes(game._id) ? (
+                <OrangeButton
+                  onClick={() => {
+                    crearTablero(game._id, game.challengers)
+                  }}
+                >
+                  Ya iniciado
                 </OrangeButton>
               ) : (
                 <OrangeButton

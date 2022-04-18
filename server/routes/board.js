@@ -7,10 +7,6 @@ const Board = require('../models/Boards_Model')
 router.post('/createBoard', async (req, res) => {
   const { game_id, challengers, user_id } = req.body
 
-  // Antes de crear el tablero deberé confirmar que el USER no lo tenga ya creado
-  // Para ello debo buscar entre los Boards del usuarios y ver que ninguno tenga el ID del Game
-  // Ahora simplemete crearé el tablero.
-
   const newBoard = await Board.create({
     game: game_id,
     challengersToDo: challengers,

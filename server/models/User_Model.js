@@ -10,6 +10,7 @@ const UserModel = new Schema(
     gamesStarted: [{ type: Schema.Types.ObjectId, ref: 'Game' }],
     gamesFinished: [{ type: Schema.Types.ObjectId, ref: 'Game' }],
     gamesFailed: [{ type: Schema.Types.ObjectId, ref: 'Game' }],
+    boardsStarted: [{ type: Schema.Types.ObjectId, ref: 'Board' }],
     friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   },
   {

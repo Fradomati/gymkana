@@ -6,9 +6,12 @@ export const createBoard = async ({ game_id, challengers, user_id }) => {
     challengers,
     user_id,
   })
-  const responseUser = await authService.post('/addBoardToUser', {
+  const board_id = responseBoard.data.newBoard._id
+  console.log(board_id, responseBoard)
+  const responseUser = await authService.post('/addGameToUser', {
     game_id,
     user_id,
+    board_id,
   })
   console.log('Board', responseBoard.data, 'User', responseUser.data)
   return [responseBoard.data, responseUser.data]
