@@ -1,17 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { logoutFN } from '../../services/Auth_Service'
 
 // Styles
-import { MainNavContainer, ULBar, Li, BtnMobile } from './style'
+import { MainNavContainer, ULBar, Li, BtnMobile } from '../navbar/style'
+import { LiGames } from '../../components/LFG/style'
 
-// User Session
-import { UserSessionContext } from '../../../lib/Authentication/withAuthentication'
-
-export const NavBar = () => {
+export const NavBarLogout = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-  const [userLoaded, setUserLoaded] = useContext(UserSessionContext)
 
   const mobileNav = () => {
     setMobileMenu(!mobileMenu)
@@ -20,13 +16,9 @@ export const NavBar = () => {
     const changeWidth = () => {
       setScreenWidth(window.innerWidth)
     }
+
     window.addEventListener('resize', changeWidth)
   }, [])
-
-  const logout = async () => {
-    await logoutFN()
-    setUserLoaded(false)
-  }
 
   return (
     <MainNavContainer>
@@ -41,8 +33,12 @@ export const NavBar = () => {
           <Link to="/">
             <Li>Inicio</Li>
           </Link>
-          <Li>Example 2</Li>
-          <Li onClick={logout}>Salir -></Li>
+          <Link to="/login">
+            <Li>Entrar</Li>
+          </Link>
+          <Link to="/signup">
+            <Li>¡Únete!</Li>
+          </Link>
         </ULBar>
       )}
     </MainNavContainer>

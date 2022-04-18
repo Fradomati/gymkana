@@ -4,14 +4,27 @@ export const ParentDiv = styled.div`
   display: flex;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  margin: 1em 0;
 `;
 
 export const ChildDiv = styled.div`
-  width: 80%;
+  width: 65%;
+  padding: 1.5em;
+  background-color: #ffffff;
+    box-shadow: 0px 0px 3px 0px #888888ad;
+    border-radius: 5px;
 `;
 
+
 /** Styles of Tools **/
+
+export const TitleDiv = styled.div`
+text-align: center;
+margin: 1em 0;
+font-size: 2em;
+color: #db6400;
+font-weight: bold;
+`
 
 export const UlStatic = styled.ul`
   display: flex;
@@ -28,7 +41,8 @@ export const LiStatic_A = styled.li`
   border-radius: 5px;
   border: 1px solid #080808;
   margin: 0.1em;  
-  padding: 0.4em;
+  padding: 0.3em;
+  cursor: default;
 `;
 
 export const LiStatic_B = styled.li`
@@ -40,7 +54,8 @@ export const LiStatic_B = styled.li`
   border-radius: 5px;
   border: 1px solid #080808;
   margin: 0.1em;
-  padding: 0.4em;
+  padding: 0.3em;
+  cursor: default;
 `;
 
 export const LiDynamic_A = styled.li`
@@ -53,7 +68,8 @@ export const LiDynamic_A = styled.li`
   text-align: center;
   border-radius: 5px;
   margin: 0.1em;  
-  padding: 0.4em;
+  padding: 0.3em;
+  cursor: default;
 `;
 
 export const LiDynamic_B = styled.li`
@@ -66,7 +82,8 @@ export const LiDynamic_B = styled.li`
   border-radius: 5px;
   border: 1px solid #d39a3f;
   margin: 0.1em;
-  padding: 0.4em;
+  padding: 0.3em;
+  cursor: default;
 `;
 
 export const UlDinamic = styled.ul`
@@ -79,12 +96,16 @@ export const UlDinamic = styled.ul`
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     height: 10px;
-    background-color: white;
-}
+    background-color: #e2e2e2;
+    border-radius: 5px;
+  }
   &::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    background-color: #3f8796;
     box-shadow: 0 0 1px rgb(255 255 255 / 50%);
+    &:hover {
+      background-color: #16697a;
+    }
   }
 `;
 
